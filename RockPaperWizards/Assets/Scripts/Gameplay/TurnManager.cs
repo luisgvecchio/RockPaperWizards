@@ -4,12 +4,30 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    void Start()
+    public GameObject turnPlate;
+    public GameObject recopilationPanel;
+    public EndOfMatchManager endOfMatchManager;
+
+    public void TurnOnTurnPlate()
     {
-        
+        if (endOfMatchManager.endOfMatch != true)
+        {
+            turnPlate.SetActive(true);
+        }
     }
-    void Update()
+    public void TurnOffTurnPlate()
     {
-        
+        turnPlate.SetActive(false);
+    }
+    public void TurnOffRecopilationPanel()
+    {
+        if (endOfMatchManager.endOfMatch != true)
+        {
+            recopilationPanel.SetActive(false);
+        }
+    }
+    public void TurnOnRecopilationPanel()
+    {
+        recopilationPanel.SetActive(true);
     }
 }

@@ -13,7 +13,7 @@ public class PlayerOutlineManager : MonoBehaviour
 
     public void TurnOffOutline()
     {
-        sprite.material = default;
+        //sprite.material;
     }
 
     public void TurnOnOutline()

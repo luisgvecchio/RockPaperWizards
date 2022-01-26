@@ -7,13 +7,16 @@ public class PlayerTurnManager : MonoBehaviour
 {
     public bool myTurn;
     public GameObject[] uIElements;
+    public EndOfMatchManager endOfMatchManager;
 
     public void StartTurn()
     {
-        myTurn = true;
-        ActivateUI();
+        if (endOfMatchManager.endOfMatch != true)
+        {
+            myTurn = true;
+            ActivateUI();
+        }
     }
-
 
     public void EndTrun()
     {
