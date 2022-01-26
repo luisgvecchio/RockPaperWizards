@@ -20,7 +20,6 @@ public class PlayerName : MonoBehaviour
     void Start()
     {
 
-
         if (gameObject.name == "Player1")
         {
             nameLabel.text = player1Name;

@@ -9,8 +9,8 @@ public class SaveName : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inputFieldP1.text = PlayerPrefs.GetString("Player1Name");
-        inputFieldP2.text = PlayerPrefs.GetString("Player2Name");
+        //inputFieldP1.text = PlayerPrefs.GetString("Player1Name");
+        //inputFieldP2.text = PlayerPrefs.GetString("Player2Name");
     }
 
     // Update is called once per frame
@@ -20,6 +20,6 @@ public class SaveName : MonoBehaviour
     }
     public void SavePlayer2Name()
     {
-        PlayerPrefs.SetString("Player2Name", inputFieldP2.text);
+        //PlayerPrefs.SetString("Player2Name", inputFieldP2.text);
     }
 }
