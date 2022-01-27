@@ -5,21 +5,25 @@ using TMPro;
 
 public class SaveName : MonoBehaviour
 {
-    public TMP_InputField inputFieldP1, inputFieldP2;
-    // Start is called before the first frame update
+    string nameP1, nameP2;
+
     void Start()
     {
-        //inputFieldP1.text = PlayerPrefs.GetString("Player1Name");
-        //inputFieldP2.text = PlayerPrefs.GetString("Player2Name");
+        if (gameObject.CompareTag("P1Name"))
+        {
+            nameP1 = GetComponentInChildren<TextMeshProUGUI>().text;
+        }
+        else if (gameObject.CompareTag("P2Name"))
+        {
+            nameP2 = GetComponentInChildren<TextMeshProUGUI>().text;
+        }
     }
-
-    // Update is called once per frame
     public void SavePlayer1Name()
     {
-        PlayerPrefs.SetString("Player1Name", inputFieldP1.text);
+        PlayerPrefs.SetString("Player1Name", nameP1);
     }
     public void SavePlayer2Name()
     {
-        //PlayerPrefs.SetString("Player2Name", inputFieldP2.text);
+        PlayerPrefs.SetString("Player2Name", nameP2);
     }
 }

@@ -12,6 +12,9 @@ public class ButtonListCreator : MonoBehaviour
     private void Start()
     {
         UpdateButtonList();
+        EraseButtonList();
+        UpdateButtonList();
+        
     }
 
     public void EraseButtonList()
@@ -25,7 +28,6 @@ public class ButtonListCreator : MonoBehaviour
     {
         foreach (var profile in profiles.profilesList.Profiles)
         {
-            Debug.Log(profile);
             Instantiate(buttonTemplate, panel.transform);
             var text = buttonTemplate.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             text.text = profile;

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Pedro
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -146,9 +146,10 @@ GameObject:
   - component: {fileID: 4377933228641373756}
   - component: {fileID: 4377933228641373757}
   - component: {fileID: 4377933228641373746}
+  - component: {fileID: -4671119737034195641}
   m_Layer: 5
-  m_Name: ButtonTemplate
-  m_TagString: Untagged
+  m_Name: ButtonTemplateP2
+  m_TagString: P2Name
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,9 +256,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4438473157218861017, guid: 79283be80c23fe049b022b33dc03eab8, type: 3}
+      - m_Target: {fileID: -4671119737034195641}
         m_TargetAssemblyTypeName: SaveName, Assembly-CSharp
-        m_MethodName: SavePlayer1Name
+        m_MethodName: SavePlayer2Name
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -267,3 +268,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: -6301972967245175646, guid: 6270bc0fede6c4542b120d73c8a39af1, type: 3}
+        m_TargetAssemblyTypeName: ShowPlayerChosenNameController, Assembly-CSharp
+        m_MethodName: ShowP2Name
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-4671119737034195641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377933228641373744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eff1b67b03a2b048bd0a440f8529ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
