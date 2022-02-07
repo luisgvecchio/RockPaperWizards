@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -8,6 +6,7 @@ public class AttackCompareManager : MonoBehaviour
     public PlayerAttacks player1Attack, player2Attack;
     public PlayerLifeCounter player1Lives, player2Lives;
     public ResultTextManager resultText;
+    public Resolution clash;
 
     public enum Resolution
     {
@@ -22,24 +21,19 @@ public class AttackCompareManager : MonoBehaviour
         PlantVsWater
     }
 
-    public Resolution clash;
-
     public string GetAttacks()
     {
         string resolution = player1Attack.chosenattack + "Vs" + player2Attack.chosenattack;
-
         return resolution;
     }
     public void CheckResolution(string resolution)
     {
         clash = (Resolution)Enum.Parse(typeof(Resolution), resolution);
     }
-
     public void RunResolution()
     {
         CheckResolution(GetAttacks());
     }
-
     public void SetLivesAfterAttacks()
     {
         switch (clash)
