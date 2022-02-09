@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class PlayerName : MonoBehaviour
 {
     public TextMeshProUGUI nameLabel;
-    GameObject labelHolderP1, labelHolderP2;
+    GameObject labelHolder;
 
     public string player1Name;
     public string player2Name;
+
+    Vector3 offset;
 
     private void Awake()
     {
@@ -19,21 +21,43 @@ public class PlayerName : MonoBehaviour
     }
     void Start()
     {
+        offset  = new Vector3(0, 100, -transform.position.z);
 
         if (gameObject.name == "Player1")
         {
             nameLabel.text = player1Name;
-            Transform canvas = GameObject.Find("Canvas").transform;
-            labelHolderP1 = Instantiate(nameLabel.gameObject, canvas);
-            labelHolderP1.GetComponent<RectTransform>().transform.position = transform.position + new Vector3(0, 2, -transform.position.z);
+            SetPosition();
         }
         else if (gameObject.name == "Player2")
         {
             nameLabel.text = player2Name;
-            Transform canvas = GameObject.Find("Canvas").transform;
-            labelHolderP2 = Instantiate(nameLabel.gameObject, canvas);
-            labelHolderP2.GetComponent<RectTransform>().transform.position = transform.position + new Vector3(0, 2, -transform.position.z);
+            SetPosition();
         }
+    }
 
+    private void SetPosition()
+    {
+        CreateLabelHolderAsChildOfCanvas();
+        Vector3 anchoredPosition = ConvertWorldToUIPosition();
+        SetUIPositionPlusOffset(anchoredPosition);
+    }
+
+    private void SetUIPositionPlusOffset(Vector3 anchoredPosition)
+    {
+        labelHolder.GetComponent<RectTransform>().transform.position = anchoredPosition + offset;
+    }
+
+    private Vector3 ConvertWorldToUIPosition()
+    {
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+        Vector3 anchoredPosition = transform.InverseTransformPoint(screenPoint);
+        return anchoredPosition;
+    }
+
+    private void CreateLabelHolderAsChildOfCanvas()
+    {
+        Transform canvas = GameObject.Find("Canvas").transform;
+
+        labelHolder = Instantiate(nameLabel.gameObject, canvas);
     }
 }

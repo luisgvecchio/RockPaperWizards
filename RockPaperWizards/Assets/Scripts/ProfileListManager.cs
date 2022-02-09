@@ -5,9 +5,16 @@ using TMPro;
 using System;
 using System.IO;
 using System.Text;
+using Firebase;
+using Firebase.Database;
+using Firebase.Auth;
+using Firebase.Extensions;
 
 public class ProfileListManager : MonoBehaviour
 {
+
+    string jsonString;
+
     [Serializable]
     public class ProfilesSaveData
     {
@@ -28,30 +35,59 @@ public class ProfileListManager : MonoBehaviour
     }
 
 
-    //It is saving on both PlayerPrefs and ProfilesData.json
+    //It is saving on, PlayerPrefs, ProfilesData.json and Uploading it to Firebase
     public void UpdateProfileList()
     {
         ProfilesSaveData profilesSave = new ProfilesSaveData();
 
         profilesSave.Profiles = profilesList.Profiles;
 
-        string jsonString = JsonUtility.ToJson(profilesSave);
+        jsonString = JsonUtility.ToJson(profilesSave);
         PlayerPrefs.SetString("SavedProfilesList", jsonString);
 
         SaveToFile("ProfilesData.json", jsonString);
+        SaveToFirebase(jsonString);
     }
 
     //It only loads from ProfileData.json
-    public void LoadProfileList()
+    public void LoadProfileList(string loadData)
     {
         //string jsonString = PlayerPrefs.GetString("SavedProfilesList");
 
-        profilesList = JsonUtility.FromJson<ProfilesSaveData>(LoadFromFile("ProfilesData.json"));
+        profilesList = JsonUtility.FromJson<ProfilesSaveData>(LoadFromFile(loadData));
     }
+
+    public void LoadFromFirebase()
+    {
+        var db = FirebaseDatabase.DefaultInstance;
+        var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+        db.RootReference.Child("users").Child(userId).Child("Profiles").GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.Exception != null)
+            {
+                Debug.LogError(task.Exception);
+            }
+
+            //here we get the result from our database.
+            DataSnapshot snap = task.Result;
+
+            //And send the json data to a function that can update our game.
+
+            LoadProfileList(snap.GetRawJsonValue());
+        });
+        }
 
     public void EraseAllListElements()
     {
         profilesList.Profiles.Clear();
+    }
+
+    public void SaveToFirebase(string data)
+    {
+        var db = FirebaseDatabase.DefaultInstance;
+        var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+        //puts the json data in the "users/userId" part of the database.
+        db.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(data);
     }
 
     public void SaveToFile(string fileName, string jsonString)

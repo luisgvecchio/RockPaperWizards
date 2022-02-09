@@ -1,0 +1,34 @@
+{
+    "name": "InputEditor",
+    "maps": [
+        {
+            "name": "Base",
+            "id": "9d54b879-b766-43fd-8498-a11f03f29c36",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Value",
+                    "id": "b181c3eb-6b75-4ee4-837f-48378e541adc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f42d2276-f370-4fe0-9bc7-916dd913cbd6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
