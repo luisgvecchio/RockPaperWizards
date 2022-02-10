@@ -10,6 +10,9 @@ using Firebase.Database;
 using Firebase.Auth;
 using Firebase.Extensions;
 
+public delegate void LoadProfileList();
+public delegate void UpdateProfileList();
+
 [System.Serializable]
 public class ProfilesSaveData
 {
@@ -22,6 +25,9 @@ public class ProfileListManager : MonoBehaviour
 
     public TMP_InputField inputFieldP1, inputFieldP2;
     public ProfilesSaveData profilesList = new ProfilesSaveData();
+
+    public event LoadProfileList OnLoad;
+    public event UpdateProfileList OnSave;
 
     public void AddProfileP1()
     {
@@ -45,32 +51,36 @@ public class ProfileListManager : MonoBehaviour
         jsonString = JsonUtility.ToJson(profilesSave);
         PlayerPrefs.SetString("SavedProfilesList", jsonString);
 
-        SaveToFile("ProfilesData.json", jsonString);
         SaveToFirebase(jsonString);
+
+        OnSave?.Invoke();
     }
 
     //It only loads from ProfileData.json
     public void LoadProfileList(string loadData)
     {
         profilesList = JsonUtility.FromJson<ProfilesSaveData>(loadData);
+
+        OnLoad?.Invoke();
     }
 
     public void LoadFromFirebase()
     {
         var db = FirebaseDatabase.DefaultInstance;
         var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+
         db.RootReference.Child("users").Child(userId).GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Exception != null)
             {
                 Debug.LogError(task.Exception);
             }
-            //here we get the result from our database.
+
             DataSnapshot snap = task.Result;
 
             LoadProfileList(snap.GetRawJsonValue());
-
-            Debug.Log("LoadFromFirebas()");
+                        
+            Debug.Log("LoadFromFirebase");
         });
     }
 
@@ -83,40 +93,9 @@ public class ProfileListManager : MonoBehaviour
     {
         var db = FirebaseDatabase.DefaultInstance;
         var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-        //puts the json data in the "users/userId" part of the database.
+
         db.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(data);
     }
-
-    public void SaveToFile(string fileName, string jsonString)
-    {
-        // Open a file in write mode. This will create the file if it's missing.
-        // It is assumed that the path already exists.
-        using (var stream = File.OpenWrite(fileName))
-        {
-            // Truncate the file if it exists (we want to overwrite the file)
-            stream.SetLength(0);
-
-            // Convert the string into bytes. Assume that the character-encoding is UTF8.
-            // Do you not know what encoding you have? Then you have UTF-8
-            var bytes = Encoding.UTF8.GetBytes(jsonString);
-
-            // Write the bytes to the hard-drive
-            stream.Write(bytes, 0, bytes.Length);
-
-            // The "using" statement will automatically close the stream after we leave
-            // the scope - this is VERY important
-            Debug.Log("working");
-        }
-    }
-    public string LoadFromFile(string fileName)
-    {
-        // Open a stream for the supplied file name as a text file
-        using (var stream = File.OpenText(fileName))
-        {
-            // Read the entire file and return the result. This assumes that we've written the
-            // file in UTF-8
-            return stream.ReadToEnd();
-        }
-    }
+    
 
 }

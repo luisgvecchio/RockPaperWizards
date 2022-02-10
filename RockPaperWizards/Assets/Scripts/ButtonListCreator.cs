@@ -7,7 +7,14 @@ public class ButtonListCreator : MonoBehaviour
 {
     public GameObject buttonTemplate, panel;
    
-    public ProfileListManager profiles;
+    public ProfileListManager profileManager;
+
+    private void Start()
+    {
+        profileManager.OnLoad += UpdateButtonList;
+        profileManager.OnSave += UpdateButtonList;
+    }
+
     public void EraseButtonList()
     {
         foreach (Transform child in panel.transform)
@@ -17,9 +24,9 @@ public class ButtonListCreator : MonoBehaviour
     }
     public void UpdateButtonList()
     {
-        Debug.Log("In in UpdateList()");
+        EraseButtonList();
 
-        foreach (var profile in profiles.profilesList.Profiles)
+        foreach (var profile in profileManager.profilesList.Profiles)
         {
             Instantiate(buttonTemplate, panel.transform);
             var text = buttonTemplate.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
