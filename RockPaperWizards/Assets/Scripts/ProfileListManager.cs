@@ -10,28 +10,28 @@ using Firebase.Database;
 using Firebase.Auth;
 using Firebase.Extensions;
 
+[System.Serializable]
+public class ProfilesSaveData
+{
+    public List<string> Profiles = new List<string>();
+}
+
 public class ProfileListManager : MonoBehaviour
 {
-
     string jsonString;
-
-    [Serializable]
-    public class ProfilesSaveData
-    {
-        public List<string> Profiles = new List<string>();
-    }
 
     public TMP_InputField inputFieldP1, inputFieldP2;
     public ProfilesSaveData profilesList = new ProfilesSaveData();
 
     public void AddProfileP1()
     {
-       profilesList.Profiles.Add(inputFieldP1.text);
-        
+        profilesList.Profiles.Add(inputFieldP1.text);
+        UpdateProfileList();
     }
     public void AddProfileP2()
     {
         profilesList.Profiles.Add(inputFieldP2.text);
+        UpdateProfileList();
     }
 
 
@@ -52,30 +52,27 @@ public class ProfileListManager : MonoBehaviour
     //It only loads from ProfileData.json
     public void LoadProfileList(string loadData)
     {
-        //string jsonString = PlayerPrefs.GetString("SavedProfilesList");
-
-        profilesList = JsonUtility.FromJson<ProfilesSaveData>(LoadFromFile(loadData));
+        profilesList = JsonUtility.FromJson<ProfilesSaveData>(loadData);
     }
 
     public void LoadFromFirebase()
     {
         var db = FirebaseDatabase.DefaultInstance;
         var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-        db.RootReference.Child("users").Child(userId).Child("Profiles").GetValueAsync().ContinueWithOnMainThread(task =>
+        db.RootReference.Child("users").Child(userId).GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Exception != null)
             {
                 Debug.LogError(task.Exception);
             }
-
             //here we get the result from our database.
             DataSnapshot snap = task.Result;
 
-            //And send the json data to a function that can update our game.
-
             LoadProfileList(snap.GetRawJsonValue());
+
+            Debug.Log("LoadFromFirebas()");
         });
-        }
+    }
 
     public void EraseAllListElements()
     {

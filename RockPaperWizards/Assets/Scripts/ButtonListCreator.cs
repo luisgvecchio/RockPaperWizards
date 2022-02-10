@@ -8,15 +8,6 @@ public class ButtonListCreator : MonoBehaviour
     public GameObject buttonTemplate, panel;
    
     public ProfileListManager profiles;
-
-    private void Start()
-    {
-        UpdateButtonList();
-        EraseButtonList();
-        UpdateButtonList();
-        
-    }
-
     public void EraseButtonList()
     {
         foreach (Transform child in panel.transform)
@@ -26,6 +17,8 @@ public class ButtonListCreator : MonoBehaviour
     }
     public void UpdateButtonList()
     {
+        Debug.Log("In in UpdateList()");
+
         foreach (var profile in profiles.profilesList.Profiles)
         {
             Instantiate(buttonTemplate, panel.transform);

@@ -5,6 +5,8 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenu, settings, battleHistory, choseProfile;
+
+    public ButtonListCreator buttonCreatorP1, buttonCreatorP2;
     
     public void CloseMainMenu()
     {
