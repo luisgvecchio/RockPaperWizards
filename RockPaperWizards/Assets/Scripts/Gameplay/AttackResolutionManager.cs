@@ -1,13 +1,6 @@
 using UnityEngine;
 using System;
 
-public class AttackCompareManager : MonoBehaviour
-{
-    public PlayerAttacks player1Attack, player2Attack;
-    public PlayerLifeCounter player1Lives, player2Lives;
-    public ResultTextManager resultText;
-    public Resolution clash;
-
     public enum Resolution
     {
         FireVsFire,
@@ -20,6 +13,13 @@ public class AttackCompareManager : MonoBehaviour
         PlantVsFire,
         PlantVsWater
     }
+
+public class AttackResolutionManager : MonoBehaviour
+{
+    public PlayerAttacks player1Attack, player2Attack;
+    public PlayerLifeCounter player1Lives, player2Lives;
+    public ResultTextManager resultText;
+    public Resolution clash;
 
     public string GetAttacks()
     {

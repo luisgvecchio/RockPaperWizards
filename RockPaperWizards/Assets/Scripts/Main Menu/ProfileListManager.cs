@@ -13,11 +13,6 @@ using Firebase.Extensions;
 public delegate void LoadProfileList();
 public delegate void UpdateProfileList();
 
-[System.Serializable]
-public class ProfilesSaveData
-{
-    public List<string> Profiles = new List<string>();
-}
 
 public class ProfileListManager : MonoBehaviour
 {
@@ -40,12 +35,10 @@ public class ProfileListManager : MonoBehaviour
         UpdateProfileList();
     }
 
-
-    //It is saving on, PlayerPrefs, ProfilesData.json and Uploading it to Firebase
+    // This method runs the OnSave event
     public void UpdateProfileList()
     {
         ProfilesSaveData profilesSave = new ProfilesSaveData();
-
         profilesSave.Profiles = profilesList.Profiles;
 
         jsonString = JsonUtility.ToJson(profilesSave);
@@ -55,15 +48,14 @@ public class ProfileListManager : MonoBehaviour
 
         OnSave?.Invoke();
     }
-
-    //It only loads from ProfileData.json
-    public void LoadProfileList(string loadData)
+    public void SaveToFirebase(string data)
     {
-        profilesList = JsonUtility.FromJson<ProfilesSaveData>(loadData);
+        var db = FirebaseDatabase.DefaultInstance;
+        var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
-        OnLoad?.Invoke();
+        db.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(data);
     }
-
+    
     public void LoadFromFirebase()
     {
         var db = FirebaseDatabase.DefaultInstance;
@@ -84,18 +76,19 @@ public class ProfileListManager : MonoBehaviour
         });
     }
 
+    // This method runs the OnLoad event
+    public void LoadProfileList(string loadData)
+    {
+        profilesList = JsonUtility.FromJson<ProfilesSaveData>(loadData);
+
+        OnLoad?.Invoke();
+    }
+
     public void EraseAllListElements()
     {
         profilesList.Profiles.Clear();
     }
 
-    public void SaveToFirebase(string data)
-    {
-        var db = FirebaseDatabase.DefaultInstance;
-        var userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-
-        db.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(data);
-    }
     
 
 }

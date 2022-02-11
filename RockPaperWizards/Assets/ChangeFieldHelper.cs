@@ -55,7 +55,6 @@ public class ChangeFieldHelper : MonoBehaviour
     {
         PlayerPrefs.SetString(name, data);
     }
-
     void Update()
     {
         //Cycle the input fields with tab
@@ -82,7 +81,6 @@ public class ChangeFieldHelper : MonoBehaviour
             }
         }
     }
-
     private void SelectNext(int index)
     {
         TMP_InputField TMP_Input = fields[(index + 1) % fields.Count].GetComponent<TMP_InputField>();

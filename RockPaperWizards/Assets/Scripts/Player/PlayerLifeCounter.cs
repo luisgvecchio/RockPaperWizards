@@ -11,8 +11,6 @@ public class PlayerLifeCounter : MonoBehaviour
     {
         var length = livesArray.Count;
 
-        Debug.Log(length);
-
         if(lives < length)
         {
             Destroy(livesArray[length - 1]);

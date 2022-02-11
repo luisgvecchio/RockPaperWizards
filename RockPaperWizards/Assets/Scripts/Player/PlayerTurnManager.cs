@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerTurnManager : MonoBehaviour
 {
-    public bool myTurn;
     public GameObject[] uIElements;
     public EndOfMatchManager endOfMatchManager;
 
@@ -13,14 +12,11 @@ public class PlayerTurnManager : MonoBehaviour
     {
         if (endOfMatchManager.endOfMatch != true)
         {
-            myTurn = true;
             ActivateUI();
         }
     }
-
     public void EndTrun()
     {
-        myTurn = false;
         DeactivateUI();
     }
 
