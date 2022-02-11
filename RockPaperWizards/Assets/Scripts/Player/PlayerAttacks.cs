@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerAttacks : MonoBehaviour
-{
-    public enum Attacks
+public enum Attacks
     {
         Fire,
         Water,
         Plant
     }
+
+public class PlayerAttacks : MonoBehaviour
+{
 
     public Attacks chosenattack;
 

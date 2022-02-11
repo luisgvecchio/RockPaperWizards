@@ -34,7 +34,7 @@ public class AttackResolutionManager : MonoBehaviour
     {
         CheckResolution(GetAttacks());
     }
-    public void SetLivesAfterAttacks()
+    public void CallActionsAfterAttacks()
     {
         switch (clash)
         {

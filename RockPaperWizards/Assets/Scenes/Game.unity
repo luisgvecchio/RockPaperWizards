@@ -2833,8 +2833,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 298833592}
-        m_TargetAssemblyTypeName: AttackCompareManager, Assembly-CSharp
-        m_MethodName: SetLivesAfterAttacks
+        m_TargetAssemblyTypeName: AttackResolutionManager, Assembly-CSharp
+        m_MethodName: CallActionsAfterAttacks
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
