@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pedro
+  m_text: button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 4377933228641373756}
   - component: {fileID: 4377933228641373757}
   - component: {fileID: 4377933228641373746}
-  - component: {fileID: -4671119737034195641}
   m_Layer: 5
   m_Name: ButtonTemplateP1 1
   m_TagString: P1Name
@@ -255,40 +254,4 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4377933228641373757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -4671119737034195641}
-        m_TargetAssemblyTypeName: SaveName, Assembly-CSharp
-        m_MethodName: SavePlayer1Name
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: -300845735282644187, guid: 74e5407671ed5094ca77d57932b5f3fe, type: 3}
-        m_TargetAssemblyTypeName: ShowPlayerChosenNameController, Assembly-CSharp
-        m_MethodName: ShowP1Name
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &-4671119737034195641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4377933228641373744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eff1b67b03a2b048bd0a440f8529ae2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+      m_Calls: []

@@ -14,7 +14,10 @@ public class WizardSelectorManager : MonoBehaviour
 
     public event SetMenuImage OnWizardChange;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        spriteNumber = GameData.Instance.userGameData.wizard;
+    }
 
     private void SetMenuImage()
     {
@@ -26,13 +29,22 @@ public class WizardSelectorManager : MonoBehaviour
     public void SelectUp()
     {
         spriteNumber++;
+        SpriteSelectorToUserData();
         if (spriteNumber > wizardSprites.Length - 1) spriteNumber = 0;
         SetMenuImage();
     }
+
+
     public void SelectDown()
     {
         spriteNumber--;
+        SpriteSelectorToUserData();
         if (spriteNumber < 0) spriteNumber = wizardSprites.Length - 1;
         SetMenuImage();
+    }
+    private void SpriteSelectorToUserData()
+    {
+        GameData.Instance.userGameData.wizard = spriteNumber;
+        GameData.Instance.SavePlayerLocalData();
     }
 }

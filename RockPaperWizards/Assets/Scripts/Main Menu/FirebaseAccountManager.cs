@@ -58,6 +58,8 @@ public class FirebaseAccountManager : MonoBehaviour
             {
                 FirebaseUser newUser = task.Result;
                 Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
+
+                GameData.Instance.OnSignIn(newUser.UserId);
             }
         });
     }
@@ -70,6 +72,7 @@ public class FirebaseAccountManager : MonoBehaviour
         password = passwordField.text;
 
         RegisterNewUser(email, password);
+        SignIn(email, password);
     }
     public void RunSignIn()
     {
@@ -78,9 +81,11 @@ public class FirebaseAccountManager : MonoBehaviour
 
         SignIn(email, password);
     }
+
     public void SignOut()
     {
-        auth.SignOut();
-        Debug.Log("User signed out");
+        GameData.Instance.playerLocalData = null;
+        GameData.Instance.gameData = null;
+        FirebaseAuth.DefaultInstance.SignOut();
     }
 }

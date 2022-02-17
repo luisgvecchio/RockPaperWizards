@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4438473157218861016}
-  - component: {fileID: 4438473157218861019}
+  - component: {fileID: 2523302852551530745}
   m_Layer: 0
-  m_Name: SaveProfileManager
+  m_Name: SaveAndLoadManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4438473157218861019
+--- !u!114 &2523302852551530745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,10 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4438473157218861022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d990b8184b0969b4f83fa6540816d210, type: 3}
+  m_Script: {fileID: 11500000, guid: 79df0be0d5da21c46a3860bb09f5d02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFieldP1: {fileID: 0}
-  inputFieldP2: {fileID: 0}
-  profilesList:
-    Profiles: []
+  playerStateManager: {fileID: 0}

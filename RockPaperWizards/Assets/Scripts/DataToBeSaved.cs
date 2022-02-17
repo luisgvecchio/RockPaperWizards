@@ -1,27 +1,36 @@
 
 using System.Collections.Generic;
 
-[System.Serializable]
-public class ProfilesSaveData
-{
-    public List<string> Profiles = new List<string>();
-}
+
 [System.Serializable] 
 public class PlayerInfo
 {
     public string name;
-    public int wizard;
-    public int voice;
+    public List<string> activeGames;
+}
+[System.Serializable]
+public class GameInfo
+{
+    public string gameName;
+    public string gameId;
+    public int openPlayerSlots = 2;
+    public List<PlayerInGameData> players;
+}
+[System.Serializable]
 
+public class PlayerInGameData
+{
+    public string userId;
+    public string name;
+
+    public int voice;
+    public int wizard;
+
+    public int lives;
     public int turnNumber;
     public Attacks currentAttack;
 
-    public int lives;
+}
 
-    public List<string> activeGames;
-}
-public class GameData
-{
-    public int gameId;
-    public List<PlayerInfo> players;
-}
+
+

@@ -47,18 +47,6 @@ public class SaveAndLoadManager : MonoBehaviour
         });
     }
 
-    //public void LoadDataQuery(string path, OnLoadedDelegate onLoadedDelegate)
-    //{
-    //    db.RootReference.Child(path).OrderByChild("numberOfPlayers").GetValueAsync().ContinueWithOnMainThread(task =>
-    //    {
-    //        if (task.Exception != null)
-    //            Debug.LogWarning(task.Exception);
-
-    //        onLoadedDelegate(task.Result.GetRawJsonValue());
-    //    });
-    //}
-
-
     //This loads multiple data and returns it as a string list with json.
     public void LoadData(string path, OnLoadedDelegateMultiple onLoadedDelegates)
     {

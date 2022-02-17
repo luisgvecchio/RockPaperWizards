@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateInfoManager : MonoBehaviour
+public class UserGameInfoManager : MonoBehaviour
 {
     public EndOfMatchManager endOfMatch;
-    private static PlayerInfo playerInfo;
     static string userPath;
 
     private void Start()
@@ -17,14 +16,9 @@ public class PlayerStateInfoManager : MonoBehaviour
 
     public void EndOfTurnUpdate()
     {
-        playerInfo.turnNumber = GetComponent<PlayerTurnManager>().turnNumber;
-        playerInfo.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
+        GameData.Instance.userGameData.turnNumber = GetComponent<PlayerTurnManager>().turnNumber;
+        GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
 
-        SaveData();
-    }
-
-    public static void SaveData()
-    {
-        SaveAndLoadManager.Instance.SaveData(userPath, JsonUtility.ToJson(playerInfo));
+        GameData.Instance.SaveUserGameData();
     }
 }

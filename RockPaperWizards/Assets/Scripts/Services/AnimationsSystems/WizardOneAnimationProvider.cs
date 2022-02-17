@@ -13,7 +13,7 @@ public class WizardOneAnimationProvider : IAnimationService
 
     public void Unitialize()
     {
-        anim.runtimeAnimatorController = null;
+        //anim.runtimeAnimatorController = null;
     }
     
     public void PlayWinAnimation()
