@@ -52,18 +52,22 @@ public class PlayerTurnManager : MonoBehaviour
     {
         if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == ("P1"))
         {
-            GameData.Instance.userGameData.turnNumber = turnNumber;
-            GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
+            UpdateTurnAndCurrentAttack();
         }
         else if (GameData.Instance.userGameData.playerNumber == 2 && gameObject.tag == ("P2"))
         {
-            GameData.Instance.userGameData.turnNumber = turnNumber;
-            GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
+            UpdateTurnAndCurrentAttack();
         }
 
         
 
         SaveTurnChanges();
+    }
+
+    private void UpdateTurnAndCurrentAttack()
+    {
+        GameData.Instance.userGameData.turnNumber = turnNumber;
+        GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
     }
 
     private void SaveTurnChanges()
