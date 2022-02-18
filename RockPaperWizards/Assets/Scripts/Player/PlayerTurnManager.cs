@@ -50,8 +50,18 @@ public class PlayerTurnManager : MonoBehaviour
     private void AddTurnCounter() { turnNumber++; }
     public void EndOfTurnUpdate()
     {
-        GameData.Instance.userGameData.turnNumber = turnNumber;
-        GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
+        if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == ("P1"))
+        {
+            GameData.Instance.userGameData.turnNumber = turnNumber;
+            GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
+        }
+        else if (GameData.Instance.userGameData.playerNumber == 2 && gameObject.tag == ("P2"))
+        {
+            GameData.Instance.userGameData.turnNumber = turnNumber;
+            GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
+        }
+
+        
 
         SaveTurnChanges();
     }
