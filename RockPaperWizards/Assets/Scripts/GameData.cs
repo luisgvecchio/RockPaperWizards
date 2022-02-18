@@ -30,7 +30,13 @@ public class GameData : MonoBehaviour
     public void OnSignIn(string userId)
     {
         this.userId = userId;
+        UpdateUserGameDataUserId(userId);
         SaveAndLoadManager.Instance.LoadData("users/" + userId, OnLoadData);
+    }
+
+    private void UpdateUserGameDataUserId(string userId)
+    {
+        userGameData.userId = userId;
     }
 
     public void OnLoadData(string json)
@@ -56,14 +62,35 @@ public class GameData : MonoBehaviour
         SaveAndLoadManager.Instance.SaveData("users/" + userId, JsonUtility.ToJson(playerLocalData));
     }
 
-    public void SaveUserGameData()
+    public void LoadUserGameData(GameInfo gameInfo)
     {
         userId ??= FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-        SaveAndLoadManager.Instance.SaveData("users/" + userId, JsonUtility.ToJson(userGameData));
+
+        if (gameInfo.players[0].userId.Equals(userId))
+        {
+            userGameData = gameInfo.players[0];
+        }
+        else if (gameInfo.players[1].userId.Equals(userId))
+        {
+            userGameData = gameInfo.players[1];
+        }
     }
 
     public void SaveGameData()
     {
         SaveAndLoadManager.Instance.SaveData("games/" + gameData.gameId, JsonUtility.ToJson(gameData));
     }
+
+    public void SaveUserGameData()
+    {
+        if (GameData.Instance.gameData.players[0].userId == GameData.Instance.userGameData.userId)
+        {
+            GameData.Instance.gameData.players[0] = GameData.Instance.userGameData;
+        }
+        else if (GameData.Instance.gameData.players[1].userId == GameData.Instance.userGameData.userId)
+        {
+            GameData.Instance.gameData.players[1] = GameData.Instance.userGameData;
+        }
+    }
+
 }

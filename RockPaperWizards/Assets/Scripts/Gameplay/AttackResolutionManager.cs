@@ -46,15 +46,15 @@ public class AttackResolutionManager : MonoBehaviour
             case Resolution.FireVsWater:
                 {
                     resultText.SetP1GotHit();
-                    player1Lives.lives--;
-                    player1Lives.UpdateLivesUI();
+                    player1Lives.P1TakesDamage();
+                    player1Lives.UpdateP1LivesUI();
                     break;
                 }
             case Resolution.FireVsPlant:
                 {
                     resultText.SetP2GotHit();
-                    player2Lives.lives--;
-                    player2Lives.UpdateLivesUI();
+                    player2Lives.P2TakesDamage();
+                    player2Lives.UpdateP2LivesUI();
                     break;
                 }
             case Resolution.WaterVsWater:
@@ -65,15 +65,15 @@ public class AttackResolutionManager : MonoBehaviour
             case Resolution.WaterVsFire:
                 {
                     resultText.SetP2GotHit();
-                    player2Lives.lives--;
-                    player2Lives.UpdateLivesUI();
+                    player2Lives.P2TakesDamage();
+                    player2Lives.UpdateP2LivesUI();
                     break;
                 }
             case Resolution.WaterVsPlant:
                 {
                     resultText.SetP1GotHit();
-                    player1Lives.lives--;
-                    player1Lives.UpdateLivesUI();
+                    player1Lives.P1TakesDamage();
+                    player1Lives.UpdateP1LivesUI();
                     break;
                 }
             case Resolution.PlantVsPlant:
@@ -84,18 +84,17 @@ public class AttackResolutionManager : MonoBehaviour
             case Resolution.PlantVsFire:
                 {
                     resultText.SetP1GotHit();
-                    player1Lives.lives--;
-                    player1Lives.UpdateLivesUI();
+                    player1Lives.P1TakesDamage();
+                    player1Lives.UpdateP1LivesUI();
                     break;
                 }
             case Resolution.PlantVsWater:
                 {
                     resultText.SetP2GotHit();
-                    player2Lives.lives--;
-                    player2Lives.UpdateLivesUI();
+                    player2Lives.P2TakesDamage();
+                    player2Lives.UpdateP2LivesUI();
                     break;
                 }
-
         }
     }
 

@@ -67,6 +67,7 @@ public class ButtonListCreator : MonoBehaviour
         var newButton = Instantiate(buttonTemplate, panel.transform).GetComponent<Button>();
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = buttonText;
         newButton.onClick.AddListener(onClickAction);
+        newButton.onClick.AddListener(UpdateGameList);
     }
 
     public void LoadGameInfo(string json)
@@ -83,6 +84,10 @@ public class ButtonListCreator : MonoBehaviour
         //TODO: display more game status on each button.
 
         newButton.onClick.AddListener(() => SceneController.Instance.StartGame(gameInfo));
+        newButton.onClick.AddListener(() => GameData.Instance.LoadUserGameData(gameInfo));
+
+        Debug.Log("WentTrhough");
+
     }
 
     public void CreateGame()
@@ -92,6 +97,7 @@ public class ButtonListCreator : MonoBehaviour
 
         newGameInfo.gameName = GameData.Instance.userGameData.name + "'s game";
 
+        SetDefaultCreatePlayerValues();
         //Add the user as the first player
         newGameInfo.players = new List<PlayerInGameData>();
         newGameInfo.players.Add(GameData.Instance.userGameData);
@@ -125,8 +131,20 @@ public class ButtonListCreator : MonoBehaviour
         GameData.Instance.SavePlayerLocalData();
         //GameData.Instance.SaveUserGameData();
 
+
         //Start the game
         SceneController.Instance.StartGame(gameInfo);
+    }
+
+    private void SetDefaultCreatePlayerValues()
+    {
+        GameData.Instance.userGameData.playerNumber = 1;
+        GameData.Instance.userGameData.lives = 5;
+    }
+    private void SetDefaultJoinPlayerValues()
+    {
+        GameData.Instance.userGameData.playerNumber = 2;
+        GameData.Instance.userGameData.lives = 5;
     }
 
     public void JoinGame(GameInfo gameInfo)
@@ -136,7 +154,7 @@ public class ButtonListCreator : MonoBehaviour
 
         GameData.Instance.SavePlayerLocalData();
 
-        Debug.Log("PLAYERWILLIAM");
+        SetDefaultJoinPlayerValues();
 
         gameInfo.players.Add(GameData.Instance.userGameData);
 
@@ -145,8 +163,13 @@ public class ButtonListCreator : MonoBehaviour
 
         string jsonString = JsonUtility.ToJson(gameInfo);
 
+        gameInfo.openPlayerSlots--;
+
         //Update the game
         SaveAndLoadManager.Instance.SaveData("games/" + gameInfo.gameId, jsonString);
+
+        //Start the game
+        SceneController.Instance.StartGame(gameInfo);
     }
 
 }

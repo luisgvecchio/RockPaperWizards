@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - InputFieldP1
-  - P1Name
-  - P2Name
+  - P1
+  - P2
   layers:
   - Default
   - TransparentFX

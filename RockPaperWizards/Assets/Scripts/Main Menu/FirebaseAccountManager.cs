@@ -86,6 +86,7 @@ public class FirebaseAccountManager : MonoBehaviour
     {
         GameData.Instance.playerLocalData = null;
         GameData.Instance.gameData = null;
+        GameData.Instance.userGameData = null;
         FirebaseAuth.DefaultInstance.SignOut();
     }
 }

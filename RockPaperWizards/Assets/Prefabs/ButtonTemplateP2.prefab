@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 4377933228641373756}
   - component: {fileID: 4377933228641373757}
   - component: {fileID: 4377933228641373746}
-  - component: {fileID: -4671119737034195641}
   m_Layer: 5
   m_Name: ButtonTemplateP2
   m_TagString: P2Name
@@ -255,40 +254,4 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4377933228641373757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -4671119737034195641}
-        m_TargetAssemblyTypeName: SaveName, Assembly-CSharp
-        m_MethodName: SavePlayer2Name
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: -6301972967245175646, guid: 6270bc0fede6c4542b120d73c8a39af1, type: 3}
-        m_TargetAssemblyTypeName: ShowPlayerChosenNameController, Assembly-CSharp
-        m_MethodName: ShowP2Name
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &-4671119737034195641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4377933228641373744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eff1b67b03a2b048bd0a440f8529ae2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+      m_Calls: []

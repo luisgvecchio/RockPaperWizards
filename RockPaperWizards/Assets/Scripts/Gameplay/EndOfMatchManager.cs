@@ -13,14 +13,14 @@ public class EndOfMatchManager : MonoBehaviour
 
     public void CheckIfEndOfMatch()
     {
-        if (player1.lives == 0)
+        if (GameData.Instance.userGameData.playerNumber == 1 && GameData.Instance.userGameData.lives == 0)
         {
             endOfMatch = true;
             resultText.DeclareWinnerP2();
             ManageButtons();
             congratsScript.SetCongratulationsMessage(resultText.winnerOfTheMatch);
         }
-        else if (player2.lives == 0)
+        else if (GameData.Instance.userGameData.playerNumber == 2 && GameData.Instance.userGameData.lives == 0)
         {
             endOfMatch = true;
             resultText.DeclareWinnerP1();

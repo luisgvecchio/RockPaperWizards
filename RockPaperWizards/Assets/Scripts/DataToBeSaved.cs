@@ -20,12 +20,14 @@ public class GameInfo
 
 public class PlayerInGameData
 {
+
     public string userId;
     public string name;
 
     public int voice;
     public int wizard;
 
+    public int playerNumber;
     public int lives;
     public int turnNumber;
     public Attacks currentAttack;

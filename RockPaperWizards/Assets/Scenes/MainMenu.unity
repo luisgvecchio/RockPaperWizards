@@ -1455,7 +1455,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &489507293
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5592,7 +5592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1487574216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5894,6 +5894,7 @@ GameObject:
   - component: {fileID: 1571924160}
   - component: {fileID: 1571924159}
   - component: {fileID: 1571924158}
+  - component: {fileID: 1571924161}
   m_Layer: 5
   m_Name: NameField
   m_TagString: Untagged
@@ -5983,13 +5984,13 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1571924161}
+        m_TargetAssemblyTypeName: EnterNameManager, Assembly-CSharp
+        m_MethodName: SaveUserName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6069,6 +6070,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571924156}
   m_CullTransparentMesh: 1
+--- !u!114 &1571924161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571924156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d690b68e1d02d8942872212184d60396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameField: {fileID: 1571924158}
 --- !u!1 &1608749643
 GameObject:
   m_ObjectHideFlags: 0
@@ -7942,7 +7956,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79df0be0d5da21c46a3860bb09f5d02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStateManager: {fileID: 0}
 --- !u!1001 &7977613625563995749
 PrefabInstance:
   m_ObjectHideFlags: 0

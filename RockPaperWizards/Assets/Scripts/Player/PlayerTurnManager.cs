@@ -29,7 +29,7 @@ public class PlayerTurnManager : MonoBehaviour
         DeactivateUI();
         AddTurnCounter();
 
-        OnTurnEnd?.Invoke();
+        EndOfTurnUpdate();
     }
 
     private void ActivateUI()
@@ -48,4 +48,18 @@ public class PlayerTurnManager : MonoBehaviour
     }
 
     private void AddTurnCounter() { turnNumber++; }
+    public void EndOfTurnUpdate()
+    {
+        GameData.Instance.userGameData.turnNumber = turnNumber;
+        GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
+
+        SaveTurnChanges();
+    }
+
+    private void SaveTurnChanges()
+    {
+        GameData.Instance.SaveUserGameData();
+
+        GameData.Instance.SaveGameData();
+    }    
 }
