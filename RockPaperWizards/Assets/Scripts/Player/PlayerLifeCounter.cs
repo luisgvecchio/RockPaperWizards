@@ -15,8 +15,9 @@ public class PlayerLifeCounter : MonoBehaviour
             UpdateP1LivesUI();
             otherPlayer.UpdateP2LivesUI();
         }
-        else if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == "P2")
+        else if (GameData.Instance.userGameData.playerNumber == 2 && gameObject.tag == "P2")
         {
+            Debug.Log("P2 Update");
             UpdateP2LivesUI();
             otherPlayer.UpdateP1LivesUI();
         }
@@ -24,53 +25,41 @@ public class PlayerLifeCounter : MonoBehaviour
     public void UpdateP1LivesUI()
     {
         int length = livesArray.Count - 1;
-        int difference = length - GameData.Instance.gameData.players[0].lives;
+        int difference = livesArray.Count - GameData.Instance.gameData.players[0].lives;
 
-        if (GameData.Instance.gameData.players[0].lives < length)
+        if (GameData.Instance.gameData.players[0].lives < livesArray.Count)
         {
-            for (int i = length - 1; i > length - difference ; i--)
+            for (int i = length; i > length - difference; i--)
             {
-                Destroy(livesArray[i - 1]);
-                livesArray.RemoveAt(i - 1);
+                Destroy(livesArray[i]);
+                livesArray.RemoveAt(i);
             }
         }
     }
     public void UpdateP2LivesUI()
     {
         int length = livesArray.Count - 1;
-        int difference = length - GameData.Instance.gameData.players[1].lives;
+        int difference = livesArray.Count - GameData.Instance.gameData.players[1].lives;
 
-        if (GameData.Instance.gameData.players[1].lives < length)
+        if (GameData.Instance.gameData.players[1].lives < livesArray.Count)
         {
-            for (int i = length - 1; i > length - difference; i--)
+            for (int i = length; i > length - difference; i--)
             {
-                Destroy(livesArray[i - 1]);
-                livesArray.RemoveAt(i - 1);
+                Destroy(livesArray[i]);
+                livesArray.RemoveAt(i);
             }
         }
     }
     public void P1TakesDamage()
     {
-        if (GameData.Instance.userGameData.playerNumber == 1)
-        {
-            GameData.Instance.userGameData.lives--;
-
-            GameData.Instance.SaveUserGameData();
-            GameData.Instance.SaveGameData();
-        }
+        GameData.Instance.gameData.players[0].lives--;
+        GameData.Instance.SaveGameData();
     }
 
     public void P2TakesDamage()
     {
-        if (GameData.Instance.userGameData.playerNumber == 2)
-        {
-            GameData.Instance.userGameData.lives--;
-
-            Debug.Log("Getting hit");
-
-            GameData.Instance.SaveUserGameData();
-            GameData.Instance.SaveGameData();
-        }
+        GameData.Instance.gameData.players[1].lives--;
+        GameData.Instance.SaveGameData();
     }
 
 
