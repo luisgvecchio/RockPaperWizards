@@ -2,26 +2,82 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class NameCurrentTurnManager : MonoBehaviour
 {
-    public PlayerTurnManager player1, player2;
-    public PlayerName player1Name, player2Name;
-    TextMeshProUGUI currentTurn;
+    public TextMeshProUGUI currentTurn;
+    public PlayerTurnManager p1, p2;
+
+    string p1Name;
+    string p2Name;
+    int turnstate;
 
     private void Start()
     {
-        currentTurn = GetComponent<TextMeshProUGUI>();
-        DisplayP1Name();
+        DisplayPlayerName();
+        p1.OnTurnEnd += DisplayPlayerName;
+        p2.OnTurnEnd += DisplayPlayerName;
     }
 
-    public void DisplayP1Name()
+    public void DisplayPlayerName()
     {
-        currentTurn.text = player1Name.player1Name + " chose attack!";
+        if (GameData.Instance.userGameData.playerNumber == 1)
+        {
+            DeclareVariables();
+
+            switch (turnstate)
+            {
+                case 0:
+                    {
+                        currentTurn.text = p1Name + " choose attack!";
+                        break;
+                    }
+                case 1:
+                    {
+                        if(p2Name != null)
+                            currentTurn.text = "Waiting for " + p2Name;
+                        else 
+                            currentTurn.text = "Waiting for opponent";
+                        break;
+                    }
+                case 2:
+                    {
+                        currentTurn.text = null;
+                        break;
+                    }
+            }
+        }
+
+        else if (GameData.Instance.userGameData.playerNumber == 2)
+        {
+            DeclareVariables();
+
+            switch (turnstate)
+            {
+                case 0:
+                    {
+                        currentTurn.text = "Waiting for " + p1Name;
+                        break;
+                    }
+                case 1:
+                    {
+                        currentTurn.text = p2Name + " choose attack!";
+                        break;
+                    }
+                case 2:
+                    {
+                        currentTurn.text = "Waiting for " + p1Name;
+                        break;
+                    }
+            }
+        }
     }
 
-    public void DisplayP2Name()
+    private void DeclareVariables()
     {
-        currentTurn.text = player2Name.player2Name + " chose attack!";
+        p1Name = GameData.Instance.gameData.players[0].name;
+        p2Name = GameData.Instance.gameData.players[1].name;
+        turnstate = GameData.Instance.gameData.turnState;
     }
 }

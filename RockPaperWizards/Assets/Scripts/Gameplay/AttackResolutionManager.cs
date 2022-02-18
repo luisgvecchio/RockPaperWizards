@@ -23,7 +23,10 @@ public class AttackResolutionManager : MonoBehaviour
 
     public string GetAttacks()
     {
-        string resolution = player1Attack.chosenattack + "Vs" + player2Attack.chosenattack;
+        var p1Attack = GameData.Instance.gameData.players[0].currentAttack;
+        var p2Attack = GameData.Instance.gameData.players[1].currentAttack;
+
+        string resolution = p1Attack + "Vs" + p2Attack;
         return resolution;
     }
     public void CheckResolution(string resolution)

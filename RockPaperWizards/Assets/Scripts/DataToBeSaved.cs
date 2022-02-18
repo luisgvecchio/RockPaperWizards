@@ -14,13 +14,13 @@ public class GameInfo
     public string gameName;
     public string gameId;
     public int openPlayerSlots = 2;
+    public int turnState;
     public List<PlayerInGameData> players;
 }
 [System.Serializable]
 
 public class PlayerInGameData
 {
-
     public string userId;
     public string name;
 
@@ -29,9 +29,7 @@ public class PlayerInGameData
 
     public int playerNumber;
     public int lives;
-    public int turnNumber;
     public Attacks currentAttack;
-
 }
 
 

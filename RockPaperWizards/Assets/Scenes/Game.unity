@@ -937,7 +937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &304540254
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4047,7 +4047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1123849374
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4308,10 +4308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b50382e04f8a54cb5b5dd324012d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 1747209981}
-  player2: {fileID: 373576277}
-  player1Name: {fileID: 1747209980}
-  player2Name: {fileID: 373576280}
+  currentTurn: {fileID: 1158999096}
+  p1: {fileID: 1747209981}
+  p2: {fileID: 373576277}
 --- !u!1 &1206135762
 GameObject:
   m_ObjectHideFlags: 0
@@ -4815,6 +4814,18 @@ MonoBehaviour:
       - m_Target: {fileID: 298833590}
         m_TargetAssemblyTypeName: TurnManager, Assembly-CSharp
         m_MethodName: TurnOffRecopilationPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1158999098}
+        m_TargetAssemblyTypeName: NameCurrentTurnManager, Assembly-CSharp
+        m_MethodName: DisplayPlayerName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6735,7 +6746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1853989465
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6984,7 +6995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1910585865
 RectTransform:
   m_ObjectHideFlags: 0

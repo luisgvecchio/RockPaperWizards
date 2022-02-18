@@ -17,13 +17,13 @@ public class PlayerLifeCounter : MonoBehaviour
         }
         else if (GameData.Instance.userGameData.playerNumber == 2 && gameObject.tag == "P2")
         {
-            Debug.Log("P2 Update");
             UpdateP2LivesUI();
             otherPlayer.UpdateP1LivesUI();
         }
     }
     public void UpdateP1LivesUI()
     {
+
         int length = livesArray.Count - 1;
         int difference = livesArray.Count - GameData.Instance.gameData.players[0].lives;
 
@@ -31,6 +31,7 @@ public class PlayerLifeCounter : MonoBehaviour
         {
             for (int i = length; i > length - difference; i--)
             {
+                Debug.Log(i + " I");
                 Destroy(livesArray[i]);
                 livesArray.RemoveAt(i);
             }
@@ -40,6 +41,9 @@ public class PlayerLifeCounter : MonoBehaviour
     {
         int length = livesArray.Count - 1;
         int difference = livesArray.Count - GameData.Instance.gameData.players[1].lives;
+
+        Debug.Log(GameData.Instance.gameData.players[1].lives);
+        Debug.Log(livesArray.Count);
 
         if (GameData.Instance.gameData.players[1].lives < livesArray.Count)
         {

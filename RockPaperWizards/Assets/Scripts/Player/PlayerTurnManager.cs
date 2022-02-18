@@ -3,26 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void StartTurn();
 public delegate void EndTurn();
 
 public class PlayerTurnManager : MonoBehaviour
 {
     public GameObject[] uIElements;
     public EndOfMatchManager endOfMatchManager;
-
-    public event StartTurn OnTurnStart;
     public event EndTurn OnTurnEnd;
 
     public int turnNumber;
+
+    private void Start()
+    {
+        StartTurn();
+    }
 
     public void StartTurn()
     {
         if (endOfMatchManager.endOfMatch != true)
         {
-            ActivateUI();
+           
+            if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == "P1")
+            {
+                if(GameData.Instance.gameData.turnState == 0)
+                {
+                    ActivateUI();
+                }
+            }
+            else if (GameData.Instance.userGameData.playerNumber == 2 && gameObject.tag == "P2")
+            {
+                if (GameData.Instance.gameData.turnState == 1)
+                {
+                    ActivateUI();
+                }
+            }
         }
-        OnTurnStart?.Invoke();
     }
     public void EndTrun()
     {
@@ -30,6 +45,10 @@ public class PlayerTurnManager : MonoBehaviour
         AddTurnCounter();
 
         EndOfTurnUpdate();
+
+        OnTurnEnd?.Invoke();
+
+        //Listen to changes
     }
 
     private void ActivateUI()
@@ -52,21 +71,26 @@ public class PlayerTurnManager : MonoBehaviour
     {
         if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == ("P1"))
         {
-            UpdateTurnAndCurrentAttack();
+            UpdateTurn();
+            UpdateCurrentAttack();
         }
         else if (GameData.Instance.userGameData.playerNumber == 2 && gameObject.tag == ("P2"))
         {
-            UpdateTurnAndCurrentAttack();
+            UpdateTurn();
+            UpdateCurrentAttack();
         }
-
-        
 
         SaveTurnChanges();
     }
 
-    private void UpdateTurnAndCurrentAttack()
+    public void UpdateTurn()
     {
-        GameData.Instance.userGameData.turnNumber = turnNumber;
+        GameData.Instance.gameData.turnState++;
+
+        if (GameData.Instance.gameData.turnState > 2) GameData.Instance.gameData.turnState = 0;
+    }
+    private void UpdateCurrentAttack()
+    { 
         GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
     }
 

@@ -85,9 +85,6 @@ public class ButtonListCreator : MonoBehaviour
 
         newButton.onClick.AddListener(() => SceneController.Instance.StartGame(gameInfo));
         newButton.onClick.AddListener(() => GameData.Instance.LoadUserGameData(gameInfo));
-
-        Debug.Log("WentTrhough");
-
     }
 
     public void CreateGame()
