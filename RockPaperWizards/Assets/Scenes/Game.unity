@@ -866,6 +866,8 @@ MonoBehaviour:
   turnPlate: {fileID: 1158999094}
   recopilationPanel: {fileID: 1311429814}
   endOfMatchManager: {fileID: 298833593}
+  playerTurnP2: {fileID: 373576277}
+  playerTurnP1: {fileID: 1747209981}
 --- !u!4 &298833591
 Transform:
   m_ObjectHideFlags: 0
@@ -898,6 +900,7 @@ MonoBehaviour:
   player2Lives: {fileID: 373576283}
   resultText: {fileID: 1608866260}
   clash: 0
+  playerTurn: {fileID: 373576277}
 --- !u!114 &298833593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2817,66 +2820,6 @@ MonoBehaviour:
       - m_Target: {fileID: 373576277}
         m_TargetAssemblyTypeName: PlayerTurnManager, Assembly-CSharp
         m_MethodName: EndTrun
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 298833592}
-        m_TargetAssemblyTypeName: AttackCompareManager, Assembly-CSharp
-        m_MethodName: RunResolution
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 298833592}
-        m_TargetAssemblyTypeName: AttackResolutionManager, Assembly-CSharp
-        m_MethodName: CallActionsAfterAttacks
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1158999098}
-        m_TargetAssemblyTypeName: NameCurrentTurnManager, Assembly-CSharp
-        m_MethodName: DisplayP1Name
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 298833590}
-        m_TargetAssemblyTypeName: TurnManager, Assembly-CSharp
-        m_MethodName: TurnOffTurnPlate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 298833590}
-        m_TargetAssemblyTypeName: TurnManager, Assembly-CSharp
-        m_MethodName: TurnOnRecopilationPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

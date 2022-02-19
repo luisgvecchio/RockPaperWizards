@@ -35,10 +35,7 @@ public class NameCurrentTurnManager : MonoBehaviour
                     }
                 case 1:
                     {
-                        if(p2Name != null)
-                            currentTurn.text = "Waiting for " + p2Name;
-                        else 
-                            currentTurn.text = "Waiting for opponent";
+                        currentTurn.text = "Waiting for opponent";
                         break;
                     }
                 case 2:
@@ -57,7 +54,7 @@ public class NameCurrentTurnManager : MonoBehaviour
             {
                 case 0:
                     {
-                        currentTurn.text = "Waiting for " + p1Name;
+                        currentTurn.text = "Waiting for opponent";
                         break;
                     }
                 case 1:
@@ -67,7 +64,7 @@ public class NameCurrentTurnManager : MonoBehaviour
                     }
                 case 2:
                     {
-                        currentTurn.text = "Waiting for " + p1Name;
+                        currentTurn.text = "Waiting for opponent";
                         break;
                     }
             }
@@ -77,7 +74,13 @@ public class NameCurrentTurnManager : MonoBehaviour
     private void DeclareVariables()
     {
         p1Name = GameData.Instance.gameData.players[0].name;
-        p2Name = GameData.Instance.gameData.players[1].name;
         turnstate = GameData.Instance.gameData.turnState;
+        try
+        {
+            p2Name = GameData.Instance.gameData.players[1].name;
+        }
+        catch
+        { 
+        }
     }
 }

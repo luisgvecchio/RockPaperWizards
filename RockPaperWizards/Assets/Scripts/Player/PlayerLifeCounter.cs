@@ -31,7 +31,6 @@ public class PlayerLifeCounter : MonoBehaviour
         {
             for (int i = length; i > length - difference; i--)
             {
-                Debug.Log(i + " I");
                 Destroy(livesArray[i]);
                 livesArray.RemoveAt(i);
             }
@@ -41,9 +40,6 @@ public class PlayerLifeCounter : MonoBehaviour
     {
         int length = livesArray.Count - 1;
         int difference = livesArray.Count - GameData.Instance.gameData.players[1].lives;
-
-        Debug.Log(GameData.Instance.gameData.players[1].lives);
-        Debug.Log(livesArray.Count);
 
         if (GameData.Instance.gameData.players[1].lives < livesArray.Count)
         {

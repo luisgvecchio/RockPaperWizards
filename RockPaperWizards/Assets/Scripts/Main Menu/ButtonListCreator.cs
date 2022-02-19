@@ -22,11 +22,13 @@ public class ButtonListCreator : MonoBehaviour
         EraseButtons();
 
         //create new list, load each of the users active games
-        foreach (string gameID in GameData.Instance.playerLocalData.activeGames)
+        if (GameData.Instance.playerLocalData.activeGames != null)
         {
-            SaveAndLoadManager.Instance.LoadData("games/" + gameID, LoadGameInfo);
+            foreach (string gameID in GameData.Instance.playerLocalData.activeGames)
+            {
+                SaveAndLoadManager.Instance.LoadData("games/" + gameID, LoadGameInfo);
+            }
         }
-
         //We have to few games, create a create game button
         if (GameData.Instance.playerLocalData.activeGames.Count < maxNumberButtons)
         {

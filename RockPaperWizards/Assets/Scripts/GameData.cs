@@ -27,6 +27,7 @@ public class GameData : MonoBehaviour
         }
     }
 
+
     public void OnSignIn(string userId)
     {
         this.userId = userId;
@@ -41,12 +42,12 @@ public class GameData : MonoBehaviour
 
     public void OnLoadData(string json)
     {
-        Debug.Log(json);
-
         if (json != null)
         {
             playerLocalData = JsonUtility.FromJson<PlayerInfo>(json);
         }
+
+        Debug.Log(playerLocalData.activeGames);
 
         playerLocalData ??= new PlayerInfo();
         playerLocalData.activeGames ??= new List<string>();

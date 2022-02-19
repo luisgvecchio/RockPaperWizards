@@ -3,30 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void EndTurn();
+public delegate void UpdateTurn();
 
 public class PlayerTurnManager : MonoBehaviour
 {
     public GameObject[] uIElements;
     public EndOfMatchManager endOfMatchManager;
-    public event EndTurn OnTurnEnd;
+    public event UpdateTurn OnTurnEnd;
 
     public int turnNumber;
 
     private void Start()
     {
         StartTurn();
+        OnTurnEnd += StartTurn;
     }
 
     public void StartTurn()
     {
         if (endOfMatchManager.endOfMatch != true)
         {
-           
             if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == "P1")
             {
+                Debug.Log(GameData.Instance.gameData.turnState);
+
                 if(GameData.Instance.gameData.turnState == 0)
                 {
+                    Debug.Log("After Checking turnState = 0");
                     ActivateUI();
                 }
             }
@@ -42,13 +45,7 @@ public class PlayerTurnManager : MonoBehaviour
     public void EndTrun()
     {
         DeactivateUI();
-        AddTurnCounter();
-
         EndOfTurnUpdate();
-
-        OnTurnEnd?.Invoke();
-
-        //Listen to changes
     }
 
     private void ActivateUI()
@@ -66,7 +63,6 @@ public class PlayerTurnManager : MonoBehaviour
         }
     }
 
-    private void AddTurnCounter() { turnNumber++; }
     public void EndOfTurnUpdate()
     {
         if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == ("P1"))
@@ -87,14 +83,16 @@ public class PlayerTurnManager : MonoBehaviour
     {
         GameData.Instance.gameData.turnState++;
 
-        if (GameData.Instance.gameData.turnState > 2) GameData.Instance.gameData.turnState = 0;
+        if (GameData.Instance.gameData.turnState > 3) GameData.Instance.gameData.turnState = 0;
+
+        OnTurnEnd?.Invoke();
     }
     private void UpdateCurrentAttack()
     { 
         GameData.Instance.userGameData.currentAttack = GetComponent<PlayerAttacks>().chosenattack;
     }
 
-    private void SaveTurnChanges()
+    public void SaveTurnChanges()
     {
         GameData.Instance.SaveUserGameData();
 

@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class FirebaseAccountManager : MonoBehaviour
 {
     FirebaseAuth auth;
-    FirebaseDatabase db;
     public Text infoText;
     public InputField emailField;
     public InputField passwordField;
@@ -23,9 +22,6 @@ public class FirebaseAccountManager : MonoBehaviour
                 Debug.LogError(task.Exception);
 
             auth = FirebaseAuth.DefaultInstance;
-            db = FirebaseDatabase.DefaultInstance;
-
-            db.RootReference.Child("Users").SetValueAsync("users");
         });
     }
 

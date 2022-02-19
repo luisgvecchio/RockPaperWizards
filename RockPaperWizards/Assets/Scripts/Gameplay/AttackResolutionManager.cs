@@ -1,18 +1,19 @@
 using UnityEngine;
 using System;
+using Firebase.Database;
 
-    public enum Resolution
-    {
-        FireVsFire,
-        FireVsWater,
-        FireVsPlant,
-        WaterVsWater,
-        WaterVsFire,
-        WaterVsPlant,
-        PlantVsPlant,
-        PlantVsFire,
-        PlantVsWater
-    }
+public enum Resolution
+{
+    FireVsFire,
+    FireVsWater,
+    FireVsPlant,
+    WaterVsWater,
+    WaterVsFire,
+    WaterVsPlant,
+    PlantVsPlant,
+    PlantVsFire,
+    PlantVsWater
+}
 
 public class AttackResolutionManager : MonoBehaviour
 {
@@ -20,6 +21,50 @@ public class AttackResolutionManager : MonoBehaviour
     public PlayerLifeCounter player1Lives, player2Lives;
     public ResultTextManager resultText;
     public Resolution clash;
+    public PlayerTurnManager playerTurn;
+
+    private void Start()
+    {
+        CheckCorrectTurnState();
+        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged += CheckCorrectTurnState;
+    }
+
+    void CheckCorrectTurnState(object sender, ValueChangedEventArgs args)
+    {
+        if (args.DatabaseError != null)
+        {
+            Debug.LogError(args.DatabaseError.Message);
+            return;
+        }
+
+        GameData.Instance.gameData = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
+
+        CheckCorrectTurnState();
+
+    }
+
+        private void CheckCorrectTurnState()
+    {
+        if (GameData.Instance.gameData.turnState.Equals(2))
+        {
+            if(GameData.Instance.userGameData.playerNumber == 2)
+            {
+                RunResolution();
+                CallActionsAfterAttacks();
+                Debug.Log("Befor UpdateTurn++");
+                playerTurn.UpdateTurn();
+                playerTurn.SaveTurnChanges();
+            }
+        }
+        else if (GameData.Instance.gameData.turnState.Equals(3))
+        {
+            if (GameData.Instance.userGameData.playerNumber == 1)
+            {
+                RunResolution();
+                CallActionsAfterAttacks();
+            }
+        }
+    }
 
     public string GetAttacks()
     {
