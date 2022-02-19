@@ -914,13 +914,14 @@ MonoBehaviour:
     name: 
     voice: 0
     wizard: 0
+    playerNumber: 0
     lives: 0
-    turnNumber: 0
     currentAttack: 0
   gameData:
     gameName: 
     gameId: 
     openPlayerSlots: 0
+    turnState: 0
     players: []
   userId: 
 --- !u!4 &1022706835
@@ -1101,13 +1102,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1126859693}
   m_TextComponent: {fileID: 1841367011}
   m_Placeholder: {fileID: 1838079669}
-  m_ContentType: 6
+  m_ContentType: 0
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 7
+  m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 5
+  m_CharacterValidation: 0
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:

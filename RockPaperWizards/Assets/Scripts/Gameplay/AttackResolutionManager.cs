@@ -23,6 +23,8 @@ public class AttackResolutionManager : MonoBehaviour
     public Resolution clash;
     public PlayerTurnManager playerTurn;
 
+    bool resolutionAlreadyRun;
+
     private void Start()
     {
         CheckCorrectTurnState();
@@ -38,25 +40,23 @@ public class AttackResolutionManager : MonoBehaviour
         }
 
         GameData.Instance.gameData = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
-
         CheckCorrectTurnState();
 
     }
 
         private void CheckCorrectTurnState()
     {
+        RestartResolutionLoop();
+
         if (GameData.Instance.gameData.turnState.Equals(2))
         {
-            if(GameData.Instance.userGameData.playerNumber == 2)
+            if (GameData.Instance.userGameData.playerNumber == 2 && !resolutionAlreadyRun)
             {
                 RunResolution();
                 CallActionsAfterAttacks();
-                Debug.Log("Befor UpdateTurn++");
-                playerTurn.UpdateTurn();
-                playerTurn.SaveTurnChanges();
             }
         }
-        else if (GameData.Instance.gameData.turnState.Equals(3))
+        else if (GameData.Instance.gameData.turnState.Equals(2))
         {
             if (GameData.Instance.userGameData.playerNumber == 1)
             {
@@ -64,6 +64,12 @@ public class AttackResolutionManager : MonoBehaviour
                 CallActionsAfterAttacks();
             }
         }
+    }
+
+    private void RestartResolutionLoop()
+    {
+        if (GameData.Instance.gameData.turnState.Equals(0))
+            resolutionAlreadyRun = false;
     }
 
     public string GetAttacks()
@@ -81,6 +87,7 @@ public class AttackResolutionManager : MonoBehaviour
     public void RunResolution()
     {
         CheckResolution(GetAttacks());
+        resolutionAlreadyRun = true;
     }
     public void CallActionsAfterAttacks()
     {

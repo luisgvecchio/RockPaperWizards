@@ -24,8 +24,6 @@ public class TurnManager : MonoBehaviour
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
-        // Do something with the data in args.Snapshot
-        Debug.Log("Value has changed: " + args.Snapshot.GetRawJsonValue());
 
         GameData.Instance.gameData = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
 
@@ -39,7 +37,7 @@ public class TurnManager : MonoBehaviour
             TurnOffTurnPlate();
             TurnOnRecopilationPanel();
         }
-        else if (GameData.Instance.gameData.turnState.Equals(3) && GameData.Instance.userGameData.playerNumber == 1)
+        else if (GameData.Instance.gameData.turnState.Equals(2) && GameData.Instance.userGameData.playerNumber == 1)
         {
             TurnOffTurnPlate();
             TurnOnRecopilationPanel();

@@ -18,7 +18,6 @@ public class ButtonListCreator : MonoBehaviour
     {
         PlayerInfo temporalPlayerInfo = GameData.Instance.playerLocalData;
 
-        //clear/remove the old list, If we have one.
         EraseButtons();
 
         //create new list, load each of the users active games
@@ -159,10 +158,10 @@ public class ButtonListCreator : MonoBehaviour
 
         //Update new game name
         gameInfo.gameName = gameInfo.players[0].name + " vs " + GameData.Instance.userGameData.name;
+        
+        gameInfo.openPlayerSlots--;
 
         string jsonString = JsonUtility.ToJson(gameInfo);
-
-        gameInfo.openPlayerSlots--;
 
         //Update the game
         SaveAndLoadManager.Instance.SaveData("games/" + gameInfo.gameId, jsonString);

@@ -1,3 +1,4 @@
+using Firebase.Database;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,9 +16,26 @@ public class PlayerTurnManager : MonoBehaviour
 
     private void Start()
     {
+        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged += StartTurn;
+
         StartTurn();
-        OnTurnEnd += StartTurn;
     }
+
+
+    void StartTurn(object sender, ValueChangedEventArgs args)
+    {
+        if (args.DatabaseError != null)
+        {
+            Debug.LogError(args.DatabaseError.Message);
+            return;
+        }
+
+        GameData.Instance.gameData = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
+
+        StartTurn();
+
+    }
+
 
     public void StartTurn()
     {
@@ -29,7 +47,6 @@ public class PlayerTurnManager : MonoBehaviour
 
                 if(GameData.Instance.gameData.turnState == 0)
                 {
-                    Debug.Log("After Checking turnState = 0");
                     ActivateUI();
                 }
             }
@@ -83,7 +100,7 @@ public class PlayerTurnManager : MonoBehaviour
     {
         GameData.Instance.gameData.turnState++;
 
-        if (GameData.Instance.gameData.turnState > 3) GameData.Instance.gameData.turnState = 0;
+        if (GameData.Instance.gameData.turnState > 2) GameData.Instance.gameData.turnState = 0;
 
         OnTurnEnd?.Invoke();
     }
