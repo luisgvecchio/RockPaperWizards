@@ -12,15 +12,11 @@ public class PlayerTurnManager : MonoBehaviour
     public EndOfMatchManager endOfMatchManager;
     public event UpdateTurn OnTurnEnd;
 
-    public int turnNumber;
-
     private void Start()
     {
         FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged += StartTurn;
-
         StartTurn();
     }
-
 
     void StartTurn(object sender, ValueChangedEventArgs args)
     {
@@ -30,12 +26,13 @@ public class PlayerTurnManager : MonoBehaviour
             return;
         }
 
-        GameData.Instance.gameData = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
+        GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
 
+        GameData.Instance.gameData.turnState = gameInfo.turnState;
         StartTurn();
-
     }
 
+    
 
     public void StartTurn()
     {
@@ -43,8 +40,6 @@ public class PlayerTurnManager : MonoBehaviour
         {
             if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == "P1")
             {
-                Debug.Log(GameData.Instance.gameData.turnState);
-
                 if(GameData.Instance.gameData.turnState == 0)
                 {
                     ActivateUI();
@@ -92,7 +87,6 @@ public class PlayerTurnManager : MonoBehaviour
             UpdateTurn();
             UpdateCurrentAttack();
         }
-
         SaveTurnChanges();
     }
 
@@ -100,8 +94,10 @@ public class PlayerTurnManager : MonoBehaviour
     {
         GameData.Instance.gameData.turnState++;
 
-        if (GameData.Instance.gameData.turnState > 2) GameData.Instance.gameData.turnState = 0;
-
+        if (GameData.Instance.gameData.turnState > 3)
+        {
+            GameData.Instance.gameData.turnState = 0;
+        }
         OnTurnEnd?.Invoke();
     }
     private void UpdateCurrentAttack()
@@ -112,7 +108,6 @@ public class PlayerTurnManager : MonoBehaviour
     public void SaveTurnChanges()
     {
         GameData.Instance.SaveUserGameData();
-
         GameData.Instance.SaveGameData();
     }    
 }

@@ -47,8 +47,6 @@ public class GameData : MonoBehaviour
             playerLocalData = JsonUtility.FromJson<PlayerInfo>(json);
         }
 
-        Debug.Log(playerLocalData.activeGames);
-
         playerLocalData ??= new PlayerInfo();
         playerLocalData.activeGames ??= new List<string>();
 
@@ -84,11 +82,11 @@ public class GameData : MonoBehaviour
 
     public void SaveUserGameData()
     {
-        if (GameData.Instance.gameData.players[0].userId == GameData.Instance.userGameData.userId)
+        if (userGameData.playerNumber.Equals(1))
         {
             GameData.Instance.gameData.players[0] = GameData.Instance.userGameData;
         }
-        else if (GameData.Instance.gameData.players[1].userId == GameData.Instance.userGameData.userId)
+        else if (userGameData.playerNumber.Equals(2))
         {
             GameData.Instance.gameData.players[1] = GameData.Instance.userGameData;
         }

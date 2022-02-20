@@ -40,6 +40,11 @@ public class NameCurrentTurnManager : MonoBehaviour
                     }
                 case 2:
                     {
+                        currentTurn.text = "Waiting for opponent";
+                        break;
+                    }
+                case 3:
+                    {
                         currentTurn.text = null;
                         break;
                     }
@@ -63,6 +68,11 @@ public class NameCurrentTurnManager : MonoBehaviour
                         break;
                     }
                 case 2:
+                    {
+                        currentTurn.text = null;
+                        break;
+                    }
+                case 3:
                     {
                         currentTurn.text = "Waiting for opponent";
                         break;

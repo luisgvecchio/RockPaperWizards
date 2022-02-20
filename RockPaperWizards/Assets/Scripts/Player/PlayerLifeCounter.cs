@@ -23,7 +23,6 @@ public class PlayerLifeCounter : MonoBehaviour
     }
     public void UpdateP1LivesUI()
     {
-
         int length = livesArray.Count - 1;
         int difference = livesArray.Count - GameData.Instance.gameData.players[0].lives;
 
@@ -52,16 +51,23 @@ public class PlayerLifeCounter : MonoBehaviour
     }
     public void P1TakesDamage()
     {
-        GameData.Instance.gameData.players[0].lives--;
-        GameData.Instance.SaveGameData();
+        if (GameData.Instance.userGameData.playerNumber.Equals(2))
+        {
+            GameData.Instance.gameData.players[0].lives--;
+
+            GameData.Instance.SaveGameData();
+        }
     }
 
     public void P2TakesDamage()
     {
-        GameData.Instance.gameData.players[1].lives--;
-        GameData.Instance.SaveGameData();
+        if (GameData.Instance.userGameData.playerNumber.Equals(2))
+        {
+            GameData.Instance.gameData.players[1].lives--;
+
+            GameData.Instance.userGameData.lives = GameData.Instance.gameData.players[1].lives;
+
+            GameData.Instance.SaveGameData();
+        }
     }
-
-
-
 }

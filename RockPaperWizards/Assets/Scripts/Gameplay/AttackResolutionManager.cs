@@ -21,9 +21,8 @@ public class AttackResolutionManager : MonoBehaviour
     public PlayerLifeCounter player1Lives, player2Lives;
     public ResultTextManager resultText;
     public Resolution clash;
-    public PlayerTurnManager playerTurn;
 
-    bool resolutionAlreadyRun;
+    int resolutionAlreadyRun;
 
     private void Start()
     {
@@ -38,38 +37,57 @@ public class AttackResolutionManager : MonoBehaviour
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
+        GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
 
-        GameData.Instance.gameData = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
+        GameData.Instance.gameData.turnState = gameInfo.turnState;
         CheckCorrectTurnState();
 
     }
 
         private void CheckCorrectTurnState()
     {
-        RestartResolutionLoop();
+        RunResolutionLoop();
 
         if (GameData.Instance.gameData.turnState.Equals(2))
         {
-            if (GameData.Instance.userGameData.playerNumber == 2 && !resolutionAlreadyRun)
+            if (GameData.Instance.userGameData.playerNumber == 2 && resolutionAlreadyRun == 1)
             {
                 RunResolution();
                 CallActionsAfterAttacks();
+                GameData.Instance.SaveGameData();
             }
         }
-        else if (GameData.Instance.gameData.turnState.Equals(2))
+        else if (GameData.Instance.gameData.turnState.Equals(3))
         {
-            if (GameData.Instance.userGameData.playerNumber == 1)
+            if (GameData.Instance.userGameData.playerNumber == 1 && resolutionAlreadyRun == 1)
             {
                 RunResolution();
                 CallActionsAfterAttacks();
+                GameData.Instance.SaveGameData();
             }
         }
     }
 
-    private void RestartResolutionLoop()
+    public void RestartResolutionLoop()
     {
-        if (GameData.Instance.gameData.turnState.Equals(0))
-            resolutionAlreadyRun = false;
+        resolutionAlreadyRun = 0;
+    }
+
+    private void RunResolutionLoop()
+    {
+        var turnState = GameData.Instance.gameData.turnState;
+        var playerNumber = GameData.Instance.userGameData.playerNumber;
+
+        if (turnState.Equals(2) && playerNumber == 2)
+        {
+            resolutionAlreadyRun++;
+            if (resolutionAlreadyRun > 2) resolutionAlreadyRun = 2;
+        }
+        else if (turnState.Equals(3) && playerNumber == 1)
+        {
+            resolutionAlreadyRun++;
+            if (resolutionAlreadyRun > 2) resolutionAlreadyRun = 2;
+        }
     }
 
     public string GetAttacks()
@@ -87,7 +105,6 @@ public class AttackResolutionManager : MonoBehaviour
     public void RunResolution()
     {
         CheckResolution(GetAttacks());
-        resolutionAlreadyRun = true;
     }
     public void CallActionsAfterAttacks()
     {
@@ -151,6 +168,7 @@ public class AttackResolutionManager : MonoBehaviour
                     break;
                 }
         }
+                Debug.Log("Actions Called");
     }
 
 }

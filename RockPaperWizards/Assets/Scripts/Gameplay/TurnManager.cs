@@ -8,6 +8,7 @@ public class TurnManager : MonoBehaviour
     public GameObject turnPlate;
     public GameObject recopilationPanel;
     public EndOfMatchManager endOfMatchManager;
+    public AttackResolutionManager attackResolution;
 
     public PlayerTurnManager playerTurnP2, playerTurnP1;
 
@@ -15,7 +16,6 @@ public class TurnManager : MonoBehaviour
     {
         FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged += CheckIfTurnChanged;
     }
-
 
     void CheckIfTurnChanged(object sender, ValueChangedEventArgs args)
     {
@@ -25,26 +25,47 @@ public class TurnManager : MonoBehaviour
             return;
         }
 
-        GameData.Instance.gameData = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
+        GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
 
-        CheckIfTurnChanged();
+        GameData.Instance.gameData.turnState = gameInfo.turnState;
+
+        CheckIfTurnChanged(gameInfo);
     }
 
-    void CheckIfTurnChanged()
-{
-        if (GameData.Instance.gameData.turnState.Equals(2) && GameData.Instance.userGameData.playerNumber == 2)
-        {
-            TurnOffTurnPlate();
-            TurnOnRecopilationPanel();
-        }
-        else if (GameData.Instance.gameData.turnState.Equals(2) && GameData.Instance.userGameData.playerNumber == 1)
-        {
-            TurnOffTurnPlate();
-            TurnOnRecopilationPanel();
-        }
-}
+    void CheckIfTurnChanged(GameInfo gameInfo)
+    {
+        var turnState = GameData.Instance.gameData.turnState;
+        var playerNumber = GameData.Instance.userGameData.playerNumber;
 
-public void TurnOnTurnPlate()
+        if (turnState.Equals(0) && playerNumber.Equals(1))
+        {
+            LoadGameData(gameInfo);
+        }
+        else if (turnState.Equals(1) && playerNumber.Equals(2))
+        {
+            LoadGameData(gameInfo);
+        }
+
+        if (turnState.Equals(2) && playerNumber == 2)
+        {
+            LoadGameData(gameInfo);
+            TurnOffTurnPlate();
+            TurnOnRecopilationPanel();
+        }
+        else if (turnState.Equals(3) && playerNumber == 1)
+        {
+            LoadGameData(gameInfo);
+            TurnOffTurnPlate();
+            TurnOnRecopilationPanel();
+        }
+    }
+
+    private static void LoadGameData(GameInfo gameInfo)
+    {
+        GameData.Instance.gameData = gameInfo;
+    }
+
+    public void TurnOnTurnPlate()
     {
         if (endOfMatchManager.endOfMatch != true)
         {
@@ -61,10 +82,12 @@ public void TurnOnTurnPlate()
         {
             recopilationPanel.SetActive(false);
 
-            if(GameData.Instance.userGameData.playerNumber.Equals(1))
+            attackResolution.RestartResolutionLoop();
+            playerTurnP1.UpdateTurn();
+            playerTurnP1.SaveTurnChanges();
+
+            if (GameData.Instance.userGameData.playerNumber.Equals(1))
             {
-                playerTurnP1.UpdateTurn();
-                playerTurnP1.SaveTurnChanges();
                 playerTurnP1.StartTurn();
             }
         }
