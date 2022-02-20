@@ -62,6 +62,7 @@ public class AttackResolutionManager : MonoBehaviour
             {
                 RunResolution();
                 CallActionsAfterAttacks();
+                GameData.Instance.userGameData = GameData.Instance.gameData.players[0];
                 GameData.Instance.SaveGameData();
             }
         }
