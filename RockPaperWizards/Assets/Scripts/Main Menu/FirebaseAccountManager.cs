@@ -44,6 +44,11 @@ public class FirebaseAccountManager : MonoBehaviour
 
     private void SignIn(string email, string password)
     {
+        GameData.Instance.gameData = null;
+        GameData.Instance.userGameData = null;
+        GameData.Instance.playerLocalData = null;
+
+
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.Exception != null)

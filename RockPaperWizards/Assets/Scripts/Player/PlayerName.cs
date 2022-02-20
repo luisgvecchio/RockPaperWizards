@@ -16,8 +16,8 @@ public class PlayerName : MonoBehaviour
 
     private void Awake()
     {
-        player1Name = PlayerPrefs.GetString("Player1Name");
-        player2Name = PlayerPrefs.GetString("Player2Name");
+        player1Name = GameData.Instance.gameData.players[0].name;
+        player2Name = GameData.Instance.gameData.players[1].name;
     }
     void Start()
     {
