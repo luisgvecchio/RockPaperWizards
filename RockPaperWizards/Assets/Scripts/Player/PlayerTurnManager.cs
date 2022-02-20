@@ -36,11 +36,9 @@ public class PlayerTurnManager : MonoBehaviour
 
     public void StartTurn()
     {
-        if (endOfMatchManager.endOfMatch != true)
-        {
             if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == "P1")
             {
-                if(GameData.Instance.gameData.turnState == 0)
+                if(GameData.Instance.gameData.turnState == 0 && !endOfMatchManager.endOfMatch)
                 {
                     ActivateUI();
                 }
@@ -52,7 +50,6 @@ public class PlayerTurnManager : MonoBehaviour
                     ActivateUI();
                 }
             }
-        }
     }
     public void EndTrun()
     {

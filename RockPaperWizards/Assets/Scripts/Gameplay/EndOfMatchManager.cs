@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class EndOfMatchManager : MonoBehaviour
 {
-    public PlayerLifeCounter player1, player2;
     public ResultTextManager resultText;
-    public GameObject pressAnywhereButton, rematchButton, mainMenuButton, congratulationsMessage;
+    public GameObject pressAnywhereButton, mainMenuButton, congratulationsMessage, turnPlate, recopilationPanel, player1;
     public CongratulationsTextManager congratsScript;
 
     public bool endOfMatch;
@@ -31,8 +30,10 @@ public class EndOfMatchManager : MonoBehaviour
     void ManageButtons()
     {
         pressAnywhereButton.SetActive(false);
-        rematchButton.SetActive(true);
         mainMenuButton.SetActive(true);
         congratulationsMessage.SetActive(true);
+        turnPlate.SetActive(false);
+        recopilationPanel.SetActive(true);
+        player1.SetActive(false);
     }
 }

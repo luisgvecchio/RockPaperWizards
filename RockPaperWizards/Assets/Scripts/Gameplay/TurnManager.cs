@@ -78,10 +78,7 @@ public class TurnManager : MonoBehaviour
     }
     public void TurnOffRecopilationPanel()
     {
-        if (endOfMatchManager.endOfMatch != true)
-        {
             recopilationPanel.SetActive(false);
-
             attackResolution.RestartResolutionLoop();
             playerTurnP1.UpdateTurn();
             playerTurnP1.SaveTurnChanges();
@@ -90,7 +87,6 @@ public class TurnManager : MonoBehaviour
             {
                 playerTurnP1.StartTurn();
             }
-        }
     }
     public void TurnOnRecopilationPanel()
     {

@@ -41,7 +41,6 @@ public class AttackResolutionManager : MonoBehaviour
 
         GameData.Instance.gameData.turnState = gameInfo.turnState;
         CheckCorrectTurnState();
-
     }
 
         private void CheckCorrectTurnState()
@@ -168,7 +167,6 @@ public class AttackResolutionManager : MonoBehaviour
                     break;
                 }
         }
-                Debug.Log("Actions Called");
     }
 
 }

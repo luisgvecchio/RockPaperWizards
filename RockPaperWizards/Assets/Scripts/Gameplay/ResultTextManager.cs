@@ -5,7 +5,7 @@ using TMPro;
 
 public class ResultTextManager : MonoBehaviour
 {
-    public PlayerName p1Name, p2Name;
+    public PlayersNames playerNames;
     string p1GotHit, p2GotHit, noDamage, winnerMessage;
 
     public string winnerOfTheMatch;
@@ -14,12 +14,12 @@ public class ResultTextManager : MonoBehaviour
    
     public void SetP1GotHit()
     {
-        p1GotHit = p1Name.player1Name + " got hit!!";
+        p1GotHit = playerNames.player1Name + " got hit!!";
         resultText.text = p1GotHit;
     }
     public void SetP2GotHit()
     {
-        p2GotHit = p2Name.player2Name + " got hit!!";
+        p2GotHit = playerNames.player2Name + " got hit!!";
         resultText.text = p2GotHit;
     }
     public void NoDamage()
@@ -29,13 +29,18 @@ public class ResultTextManager : MonoBehaviour
     }
     public void DeclareWinnerP1()
     {
-        winnerOfTheMatch = p1Name.player1Name;
+        Debug.Log("DEclare Winnr 1");
+        winnerOfTheMatch = playerNames.player1Name;
+        Debug.Log("DEclare Winnr 2");
         winnerMessage = "Well, well... Looks like " + winnerOfTheMatch + " it´s the winner of this duel";
+        Debug.Log("DEclare Winnr 3");
         resultText.text = winnerMessage;
+        Debug.Log("DEclare Winnr 4");
+
     }
     public void DeclareWinnerP2()
     {
-        winnerOfTheMatch = p2Name.player2Name;
+        winnerOfTheMatch = playerNames.player2Name;
         winnerMessage = "Well, well... Looks like " + winnerOfTheMatch + " it´s the winner of this duel";
         resultText.text = winnerMessage;
     }
