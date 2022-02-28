@@ -34,17 +34,20 @@ public class PlayersNames : MonoBehaviour
             return;
         }
 
-        GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
-
-        if (gameInfo.players?[1] != null)
+        try
         {
-            player2Name = gameInfo.players[1].name;
+            GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
 
-            p2Label.text = player2Name;
+            if (gameInfo.players?[1] != null)
+            {
+                player2Name = gameInfo.players[1].name;
 
-            FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged -= CheckP2Name;
+                p2Label.text = player2Name;
+
+                FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged -= CheckP2Name;
+            }
         }
-
-
+        catch
+        { }
     }
 }

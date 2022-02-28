@@ -27,7 +27,12 @@ public class TurnManager : MonoBehaviour
 
         GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
 
-        GameData.Instance.gameData.turnState = gameInfo.turnState;
+        try
+        {
+            GameData.Instance.gameData.turnState = gameInfo.turnState;
+        }
+        catch
+        { }
 
         CheckIfTurnChanged(gameInfo);
     }

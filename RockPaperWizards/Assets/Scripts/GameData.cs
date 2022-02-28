@@ -12,8 +12,6 @@ public class GameData : MonoBehaviour
     public PlayerInGameData userGameData;
     public GameInfo gameData;
 
-    public string userId;
-
     private void Awake()
     {
         if (_instance == null)
@@ -27,21 +25,27 @@ public class GameData : MonoBehaviour
         }
     }
 
-
     public void OnSignIn(string userId)
     {
-        this.userId = userId;
+        Debug.Log("OnSignIn Start");
+
         UpdateUserGameDataUserId(userId);
+
+        Debug.Log("OnSignIn After Update Method");
+
         SaveAndLoadManager.Instance.LoadData("users/" + userId, OnLoadData);
     }
 
     private void UpdateUserGameDataUserId(string userId)
     {
+        userGameData ??= new PlayerInGameData();
         userGameData.userId = userId;
     }
 
     public void OnLoadData(string json)
     {
+        Debug.Log("OnLoadData Start. json Player; " + json);
+
         if (json != null)
         {
             playerLocalData = JsonUtility.FromJson<PlayerInfo>(json);
@@ -52,27 +56,34 @@ public class GameData : MonoBehaviour
 
         SavePlayerLocalData();
 
+        Debug.Log("2nd sign in before Loading Scene");
+
         SceneController.Instance.LoadScene("MainMenu");
     }
 
     public void SavePlayerLocalData()
     {
-        userId ??= FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-        SaveAndLoadManager.Instance.SaveData("users/" + userId, JsonUtility.ToJson(playerLocalData));
+        userGameData.userId ??= FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+        SaveAndLoadManager.Instance.SaveData("users/" + userGameData.userId, JsonUtility.ToJson(playerLocalData));
     }
 
     public void LoadUserGameData(GameInfo gameInfo)
     {
-        userId ??= FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+        userGameData.userId ??= FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
-        if (gameInfo.players[0].userId.Equals(userId))
+        if (gameInfo.players[0].userId.Equals(userGameData.userId))
         {
             userGameData = gameInfo.players[0];
         }
-        else if (gameInfo.players[1].userId.Equals(userId))
+        else if (gameInfo.players[1].userId.Equals(userGameData.userId))
         {
             userGameData = gameInfo.players[1];
         }
+    }
+
+    public void LoadGameData(string json)
+    {
+        gameData = JsonUtility.FromJson<GameInfo>(json);
     }
 
     public void SaveGameData()

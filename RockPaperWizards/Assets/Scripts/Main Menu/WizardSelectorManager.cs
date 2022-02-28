@@ -12,18 +12,9 @@ public class WizardSelectorManager : MonoBehaviour
 
     public int spriteNumber;
 
-    public event SetMenuImage OnWizardChange;
-
-    private void Start()
-    {
-        spriteNumber = GameData.Instance.userGameData.wizard;
-    }
-
     private void SetMenuImage()
     {
         menuImage.sprite = wizardSprites[spriteNumber];
-
-        OnWizardChange?.Invoke();
     }
 
     public void SelectUp()

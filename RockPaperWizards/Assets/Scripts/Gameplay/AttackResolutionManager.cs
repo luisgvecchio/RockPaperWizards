@@ -27,7 +27,7 @@ public class AttackResolutionManager : MonoBehaviour
     private void Start()
     {
         CheckCorrectTurnState();
-        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged += CheckCorrectTurnState;
+        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).Child("turnState").ValueChanged += CheckCorrectTurnState;
     }
 
     void CheckCorrectTurnState(object sender, ValueChangedEventArgs args)
@@ -37,9 +37,10 @@ public class AttackResolutionManager : MonoBehaviour
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
-        GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
 
-        GameData.Instance.gameData.turnState = gameInfo.turnState;
+        SaveAndLoadManager.Instance.LoadData("games/" + GameData.Instance.gameData.gameId, GameData.Instance.LoadGameData);
+
+
         CheckCorrectTurnState();
     }
 
@@ -113,6 +114,8 @@ public class AttackResolutionManager : MonoBehaviour
             case Resolution.FireVsFire:
                 {
                     resultText.NoDamage();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttackMiddleFireAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttackMiddleFireAnimation();
                     break;
                 }
             case Resolution.FireVsWater:
@@ -120,6 +123,8 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP1GotHit();
                     player1Lives.P1TakesDamage();
                     player1Lives.UpdateP1LivesUI();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttacktoPlayerFireAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttackMiddleWaterAnimation();
                     break;
                 }
             case Resolution.FireVsPlant:
@@ -127,11 +132,16 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP2GotHit();
                     player2Lives.P2TakesDamage();
                     player2Lives.UpdateP2LivesUI();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttackMiddleFireAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttacktoPlayerPlantAnimation();
                     break;
                 }
             case Resolution.WaterVsWater:
                 {
                     resultText.NoDamage();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttackMiddleWaterAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttackMiddleWaterAnimation();
+
                     break;
                 }
             case Resolution.WaterVsFire:
@@ -139,6 +149,13 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP2GotHit();
                     player2Lives.P2TakesDamage();
                     player2Lives.UpdateP2LivesUI();
+
+                    Debug.Log(ServiceLocator.GetAnimationProviderP1());
+                    Debug.Log(ServiceLocator.GetAnimationProviderP2());
+
+
+                    ServiceLocator.GetAnimationProviderP1().PlayAttackToPlayerWaterAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttackMiddleFireAnimation();
                     break;
                 }
             case Resolution.WaterVsPlant:
@@ -146,11 +163,15 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP1GotHit();
                     player1Lives.P1TakesDamage();
                     player1Lives.UpdateP1LivesUI();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttackMiddleWaterAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttacktoPlayerPlantAnimation();
                     break;
                 }
             case Resolution.PlantVsPlant:
                 {
                     resultText.NoDamage();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttackMiddlePlantAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttackMiddlePlantAnimation();
                     break;
                 }
             case Resolution.PlantVsFire:
@@ -158,6 +179,8 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP1GotHit();
                     player1Lives.P1TakesDamage();
                     player1Lives.UpdateP1LivesUI();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttackMiddlePlantAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttacktoPlayerFireAnimation();
                     break;
                 }
             case Resolution.PlantVsWater:
@@ -165,6 +188,8 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP2GotHit();
                     player2Lives.P2TakesDamage();
                     player2Lives.UpdateP2LivesUI();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttacktoPlayerPlantAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttackMiddleWaterAnimation();
                     break;
                 }
         }

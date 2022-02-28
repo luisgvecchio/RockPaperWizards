@@ -1,6 +1,6 @@
 
 using System.Collections.Generic;
-
+using UnityEngine;
 
 [System.Serializable] 
 public class PlayerInfo
@@ -21,6 +21,8 @@ public class GameInfo
 
 public class PlayerInGameData
 {
+    Animator anim;
+
     public string userId;
     public string name;
 

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 public interface IAnimationService : IService
 {
-    void PlayWinAnimation();
-
-    void PlayLoseAnimation();
-
     void PlayIdleAnimation();
 
-    void PlayAttackAnimation();
-    
+    void PlayAttackMiddleWaterAnimation();
+    void PlayAttackMiddleFireAnimation();
+    void PlayAttackMiddlePlantAnimation();
+    void PlayAttackToPlayerWaterAnimation();
+    void PlayAttacktoPlayerFireAnimation();
+    void PlayAttacktoPlayerPlantAnimation();
+
+
 }

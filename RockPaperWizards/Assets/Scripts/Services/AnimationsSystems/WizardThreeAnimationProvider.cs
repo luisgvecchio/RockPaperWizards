@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WizardThreeAnimationProvider : IAnimationService
+public class WizardThreeAnimationProvider : ScriptableObject, IAnimationService
 {
     Animator anim;
     public void Initialize()
@@ -12,26 +12,35 @@ public class WizardThreeAnimationProvider : IAnimationService
 
     public void Unitialize()
     {
-        anim.runtimeAnimatorController = null;
-    }
-    
-    public void PlayWinAnimation()
-    {
-        //anim.Play("StateName");
-    }
-
-    public void PlayLoseAnimation()
-    {
-        //anim.Play("StateName");
+        //anim.runtimeAnimatorController = null;
     }
 
     public void PlayIdleAnimation()
     {
-        //anim.Play("StateName");
+        //anim.Play("Wizard1IdleP1");
     }
-
-    public void PlayAttackAnimation()
+    public void PlayAttackMiddleWaterAnimation()
     {
-        //anim.Play("StateName");
+        //anim.Play("Wizard1P1AttackWaterMiddle");
+    }
+    public void PlayAttackMiddleFireAnimation()
+    {
+        //anim.Play("Wizard1P1AttackFireMiddle");
+    }
+    public void PlayAttackMiddlePlantAnimation()
+    {
+        //anim.Play("Wizard1P1AttackPlantMiddle");
+    }
+    public void PlayAttackToPlayerWaterAnimation()
+    {
+        //anim.Play("Wizard1P1AttackWaterToPlayer");
+    }
+    public void PlayAttacktoPlayerFireAnimation()
+    {
+        //anim.Play("Wizard1P1AttackFireToPlayer");
+    }
+    public void PlayAttacktoPlayerPlantAnimation()
+    {
+        //anim.Play("Wizard1P1AttackPlantToPlayer");
     }
 }

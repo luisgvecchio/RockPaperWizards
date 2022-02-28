@@ -7,6 +7,8 @@ TagManager:
   - InputFieldP1
   - P1
   - P2
+  - P1Holder
+  - P2Holder
   layers:
   - Default
   - TransparentFX
