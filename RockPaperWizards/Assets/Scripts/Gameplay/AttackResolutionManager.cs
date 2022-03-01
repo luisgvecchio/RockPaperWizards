@@ -27,7 +27,7 @@ public class AttackResolutionManager : MonoBehaviour
     private void Start()
     {
         CheckCorrectTurnState();
-        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).Child("turnState").ValueChanged += CheckCorrectTurnState;
+        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged += CheckCorrectTurnState;
     }
 
     void CheckCorrectTurnState(object sender, ValueChangedEventArgs args)
@@ -37,16 +37,13 @@ public class AttackResolutionManager : MonoBehaviour
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
+        GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
 
-        Debug.Log("Checking turn change");
-
-        SaveAndLoadManager.Instance.LoadData("games/" + GameData.Instance.gameData.gameId, GameData.Instance.LoadGameData);
-
-
+        GameData.Instance.gameData.turnState = gameInfo.turnState;
         CheckCorrectTurnState();
     }
 
-        private void CheckCorrectTurnState()
+    private void CheckCorrectTurnState()
     {
         RunResolutionLoop();
 
@@ -65,6 +62,7 @@ public class AttackResolutionManager : MonoBehaviour
             {
                 RunResolution();
                 CallActionsAfterAttacks();
+                GameData.Instance.userGameData = GameData.Instance.gameData.players[0];
                 GameData.Instance.SaveGameData();
             }
         }
