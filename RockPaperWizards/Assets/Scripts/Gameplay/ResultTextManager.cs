@@ -29,13 +29,9 @@ public class ResultTextManager : MonoBehaviour
     }
     public void DeclareWinnerP1()
     {
-        Debug.Log("DEclare Winnr 1");
         winnerOfTheMatch = playerNames.player1Name;
-        Debug.Log("DEclare Winnr 2");
         winnerMessage = "Well, well... Looks like " + winnerOfTheMatch + " it´s the winner of this duel";
-        Debug.Log("DEclare Winnr 3");
         resultText.text = winnerMessage;
-        Debug.Log("DEclare Winnr 4");
 
     }
     public void DeclareWinnerP2()

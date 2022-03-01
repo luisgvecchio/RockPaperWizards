@@ -52,10 +52,14 @@ public class WizardAnimationsManager : MonoBehaviour
 
         else if (spriteNumber == 1 && gameObject.tag.Equals("P1"))
         {
+            Debug.Log("before loading service w2p1");
+
             ServiceLocator.SetAnimationProviderP1(new WizardTwoP1AnimationProvider());
         }
         else if (spriteNumber == 1 && gameObject.tag.Equals("P2"))
         {
+            Debug.Log("before loading service w2p2");
+
             ServiceLocator.SetAnimationProviderP2(new WizardTwoP2AnimationProvider());
         }
 

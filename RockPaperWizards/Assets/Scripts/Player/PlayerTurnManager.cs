@@ -51,10 +51,6 @@ void StartTurn(object sender, ValueChangedEventArgs args)
 
 public void StartTurn()
 {
-    Debug.Log(GameData.Instance.userGameData.playerNumber);
-
-    Debug.Log(gameObject.tag);
-
     if (GameData.Instance.userGameData.playerNumber == 1 && gameObject.tag == "P1")
     {
         if (GameData.Instance.gameData.turnState == 0 && !endOfMatchManager.endOfMatch)
@@ -129,7 +125,13 @@ private void UpdateCurrentAttack()
 
 public void SaveTurnChanges()
 {
-    GameData.Instance.SaveUserGameData();
+        Debug.LogError("in SaveTurnChanges");
+        Debug.Log(GameData.Instance.gameData.players[0].lives + " p1 game");
+        Debug.Log(GameData.Instance.gameData.players[1].lives + " p2 game");
+        Debug.Log(GameData.Instance.userGameData.lives + " user");
+
+
+        GameData.Instance.SaveUserGameData();
     GameData.Instance.SaveGameData();
 }
 }

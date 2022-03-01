@@ -38,6 +38,8 @@ public class AttackResolutionManager : MonoBehaviour
             return;
         }
 
+        Debug.Log("Checking turn change");
+
         SaveAndLoadManager.Instance.LoadData("games/" + GameData.Instance.gameData.gameId, GameData.Instance.LoadGameData);
 
 
@@ -63,7 +65,6 @@ public class AttackResolutionManager : MonoBehaviour
             {
                 RunResolution();
                 CallActionsAfterAttacks();
-                GameData.Instance.userGameData = GameData.Instance.gameData.players[0];
                 GameData.Instance.SaveGameData();
             }
         }
@@ -125,10 +126,12 @@ public class AttackResolutionManager : MonoBehaviour
                     player1Lives.UpdateP1LivesUI();
                     ServiceLocator.GetAnimationProviderP1().PlayAttacktoPlayerFireAnimation();
                     ServiceLocator.GetAnimationProviderP2().PlayAttackMiddleWaterAnimation();
+
                     break;
                 }
             case Resolution.FireVsPlant:
                 {
+
                     resultText.SetP2GotHit();
                     player2Lives.P2TakesDamage();
                     player2Lives.UpdateP2LivesUI();

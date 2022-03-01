@@ -2,46 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WizardTwoP2AnimationProvider : ScriptableObject, IAnimationService
+public class WizardTwoP2AnimationProvider : IAnimationService
 {
     Animator anim;
 
     public void Initialize()
     {
-        //anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimationYouWanttoLoad");
+        anim = GameObject.FindGameObjectWithTag("P2Holder").GetComponent<Animator>();
+        anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Wizard2P2/Wizard2P2");
     }
 
     public void Unitialize()
     {
-        //anim.runtimeAnimatorController = null;
+        anim = GameObject.FindGameObjectWithTag("P2Holder").GetComponent<Animator>();
+        anim.runtimeAnimatorController = null;
     }
 
     public void PlayIdleAnimation()
     {
-        //anim.Play("Wizard1IdleP1");
+        anim.Play("Wizard2IdleP2");
     }
     public void PlayAttackMiddleWaterAnimation()
     {
-        //anim.Play("Wizard1P1AttackWaterMiddle");
+        anim.Play("Wizard2P2AttackWaterMiddle");
     }
     public void PlayAttackMiddleFireAnimation()
     {
-        //anim.Play("Wizard1P1AttackFireMiddle");
+        anim.Play("Wizard2P2AttackFireMiddle");
     }
     public void PlayAttackMiddlePlantAnimation()
     {
-        //anim.Play("Wizard1P1AttackPlantMiddle");
+        anim.Play("Wizard2P2AttackPlantMiddle");
     }
     public void PlayAttackToPlayerWaterAnimation()
     {
-        //anim.Play("Wizard1P1AttackWaterToPlayer");
+        anim.Play("Wizard2P2AttackWaterToPlayer");
     }
     public void PlayAttacktoPlayerFireAnimation()
     {
-        //anim.Play("Wizard1P1AttackFireToPlayer");
+        anim.Play("Wizard2P2AttackFireToPlayer");
     }
     public void PlayAttacktoPlayerPlantAnimation()
     {
-        //anim.Play("Wizard1P1AttackPlantToPlayer");
+        anim.Play("Wizard2P2AttackPlantToPlayer");
     }
 }
