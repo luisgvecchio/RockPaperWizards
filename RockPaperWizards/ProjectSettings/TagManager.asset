@@ -9,6 +9,8 @@ TagManager:
   - P2
   - P1Holder
   - P2Holder
+  - P1Name
+  - P2Name
   layers:
   - Default
   - TransparentFX
@@ -45,4 +47,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: No Light
+    uniqueID: 3435711643
+    locked: 0
+  - name: character
+    uniqueID: 3843348571
     locked: 0

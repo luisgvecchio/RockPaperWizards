@@ -16,6 +16,8 @@ public class FirebaseAccountManager : MonoBehaviour
 
     void Start()
     {
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Exception != null)
