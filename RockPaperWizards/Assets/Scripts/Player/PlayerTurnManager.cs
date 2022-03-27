@@ -18,14 +18,6 @@ public class PlayerTurnManager : MonoBehaviour
         StartTurn();
     }
 
-    /*Added an OnDestroy event only to unsuscribe from the Firebases ValueChanged. If I log in with an user, log off, log in with another and start a match I get an error;
-
-        "UnityEngine.MissingReferenceException: The object of type 'PlayerTurnManager' has been destroyed but you are still trying to access it.
-        Your script should either check if it is null or you should not destroy the object."
-
-        It seems like Firebase wants to reference the PlayerTurn object´s referece of the previous player still.
-    */
-
     private void OnDestroy()
 {
     FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged -= StartTurn;
@@ -47,8 +39,6 @@ void StartTurn(object sender, ValueChangedEventArgs args)
     // Updates the name (only subscribed methods) 
     OnTurnEnd?.Invoke();
     }
-
-
 
 public void StartTurn()
 {

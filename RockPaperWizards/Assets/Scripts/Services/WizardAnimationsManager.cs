@@ -62,14 +62,16 @@ public class WizardAnimationsManager : MonoBehaviour
     {
         string gameIdPath = GameData.Instance.gameData.gameId;
 
-        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(gameIdPath).ValueChanged += RunP2WizardNumberUpdate;
+        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(gameIdPath + "/").Child("players").ValueChanged += RunP2WizardNumberUpdate;
     }
 
     private void UnsubscribeToP2WizardChanges()
     {
         string gameIdPath = GameData.Instance.gameData.gameId;
 
-        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(gameIdPath).ValueChanged -= RunP2WizardNumberUpdate;
+        FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(gameIdPath + "/").Child("players").ValueChanged -= RunP2WizardNumberUpdate;
+
+        Debug.Log("unsubscribed");
     }
 
     void RunP2WizardNumberUpdate(object sender, ValueChangedEventArgs args)
@@ -82,10 +84,11 @@ public class WizardAnimationsManager : MonoBehaviour
 
         try
         {
-            
-            GameInfo gameInfo = JsonUtility.FromJson<GameInfo>(args.Snapshot.GetRawJsonValue());
+            string gameIdPath = GameData.Instance.gameData.gameId;
 
-            if (gameInfo.players[1] != null)
+            SaveAndLoadManager.Instance.LoadData("games/" + gameIdPath + "/", GameData.Instance.LoadGameData);
+
+            if (GameData.Instance.gameData.players?[1] != null)
             {
                 CheckSpriteNumber();
                 ChangeWizardAnimationProvider();
