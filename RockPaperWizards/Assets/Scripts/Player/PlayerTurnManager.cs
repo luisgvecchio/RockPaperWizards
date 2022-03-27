@@ -44,7 +44,9 @@ void StartTurn(object sender, ValueChangedEventArgs args)
     GameData.Instance.gameData.turnState = gameInfo.turnState;
 
     StartTurn();
-}
+    // Updates the name (only subscribed methods) 
+    OnTurnEnd?.Invoke();
+    }
 
 
 
@@ -115,7 +117,6 @@ public void UpdateTurn()
     {
         GameData.Instance.gameData.turnState = 0;
     }
-    OnTurnEnd?.Invoke();
 }
 private void UpdateCurrentAttack()
 {

@@ -4056,6 +4056,7 @@ MonoBehaviour:
   currentTurn: {fileID: 1158999096}
   p1: {fileID: 1747209981}
   p2: {fileID: 373576277}
+  turnstate: 0
 --- !u!1001 &1171530745
 PrefabInstance:
   m_ObjectHideFlags: 0

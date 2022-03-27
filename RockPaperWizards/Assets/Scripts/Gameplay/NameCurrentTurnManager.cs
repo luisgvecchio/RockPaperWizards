@@ -11,7 +11,7 @@ public class NameCurrentTurnManager : MonoBehaviour
 
     string p1Name;
     string p2Name;
-    int turnstate;
+    public int turnstate;
 
     private void Start()
     {
