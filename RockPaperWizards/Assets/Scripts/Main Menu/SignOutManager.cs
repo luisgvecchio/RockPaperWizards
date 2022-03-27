@@ -12,6 +12,5 @@ public class SignOutManager : MonoBehaviour
         GameData.Instance.userGameData = null;
         FirebaseAuth.DefaultInstance.SignOut();
         SceneController.Instance.LoadScene("SignInMenu");
-        Debug.Log("User signed out");
     }
 }

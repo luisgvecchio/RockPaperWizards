@@ -27,12 +27,7 @@ public class GameData : MonoBehaviour
 
     public void OnSignIn(string userId)
     {
-        Debug.Log("OnSignIn Start");
-
         UpdateUserGameDataUserId(userId);
-
-        Debug.Log("OnSignIn After Update Method");
-
         SaveAndLoadManager.Instance.LoadData("users/" + userId, OnLoadData);
     }
 
@@ -44,8 +39,6 @@ public class GameData : MonoBehaviour
 
     public void OnLoadData(string json)
     {
-        Debug.Log("OnLoadData Start. json Player; " + json);
-
         if (json != null)
         {
             playerLocalData = JsonUtility.FromJson<PlayerInfo>(json);
@@ -55,9 +48,6 @@ public class GameData : MonoBehaviour
         playerLocalData.activeGames ??= new List<string>();
 
         SavePlayerLocalData();
-
-        Debug.Log("2nd sign in before Loading Scene");
-
         SceneController.Instance.LoadScene("MainMenu");
     }
 

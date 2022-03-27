@@ -29,7 +29,6 @@ public class FirebaseAccountManager : MonoBehaviour
 
     private void RegisterNewUser(string email, string password)
     {
-        Debug.Log("Starting Registration");
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.Exception != null)
@@ -39,7 +38,6 @@ public class FirebaseAccountManager : MonoBehaviour
             else
             {
                 FirebaseUser newUser = task.Result;
-                Debug.LogFormat("User Registerd: {0} ({1})", newUser.DisplayName, newUser.UserId);
             }
         });
     }
@@ -73,11 +71,6 @@ public class FirebaseAccountManager : MonoBehaviour
             else
             {
                 FirebaseUser newUser = task.Result;
-                Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
-
-
-                Debug.Log("Befor OnsignIn");
-
                 GameData.Instance.OnSignIn(newUser.UserId);
             }
         });

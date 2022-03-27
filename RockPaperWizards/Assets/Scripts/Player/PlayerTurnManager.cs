@@ -29,7 +29,6 @@ public class PlayerTurnManager : MonoBehaviour
     private void OnDestroy()
 {
     FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(GameData.Instance.gameData.gameId).ValueChanged -= StartTurn;
-    Debug.Log("Unsuscribed PlayerTurn");
 }
 
 void StartTurn(object sender, ValueChangedEventArgs args)
@@ -125,13 +124,7 @@ private void UpdateCurrentAttack()
 
 public void SaveTurnChanges()
 {
-        Debug.LogError("in SaveTurnChanges");
-        Debug.Log(GameData.Instance.gameData.players[0].lives + " p1 game");
-        Debug.Log(GameData.Instance.gameData.players[1].lives + " p2 game");
-        Debug.Log(GameData.Instance.userGameData.lives + " user");
-
-
-        GameData.Instance.SaveUserGameData();
+    GameData.Instance.SaveUserGameData();
     GameData.Instance.SaveGameData();
 }
 }

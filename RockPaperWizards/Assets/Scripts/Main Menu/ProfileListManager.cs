@@ -22,9 +22,6 @@ public class ProfileListManager : MonoBehaviour
     public TMP_InputField inputFieldP1, inputFieldP2;
 
 
-    public event LoadProfileList OnLoad;
-    public event UpdateProfileList OnSave;
-
     //public void AddProfileP1()
     //{
     //    profilesList.Profiles.Add(inputFieldP1.text);

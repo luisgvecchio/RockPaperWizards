@@ -39,7 +39,6 @@ public class PlayerLifeCounter : MonoBehaviour
         }
         catch
         {
-            Debug.Log("Failed Loading p1 Lives Ui");
         }
     }
     public void UpdateP2LivesUI()
@@ -59,7 +58,6 @@ public class PlayerLifeCounter : MonoBehaviour
         }
         catch
         {
-            Debug.Log("Failed Loading p2 Lives Ui");
         }
     }
     public void P1TakesDamage()
@@ -69,8 +67,6 @@ public class PlayerLifeCounter : MonoBehaviour
             GameData.Instance.gameData.players[0].lives--;
 
             GameData.Instance.SaveGameData();
-
-            Debug.Log(GameData.Instance.gameData.players[0].lives + " lives after damage");
         }
     }
 

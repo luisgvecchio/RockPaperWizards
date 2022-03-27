@@ -29,6 +29,8 @@ public class WizardTwoP2AnimationProvider : IAnimationService
     public void PlayAttackMiddleFireAnimation()
     {
         anim.Play("Wizard2P2AttackFireMiddle");
+
+        Debug.Log("Should´ve played the animation");
     }
     public void PlayAttackMiddlePlantAnimation()
     {

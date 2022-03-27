@@ -10,7 +10,12 @@ public class WizardSelectorManager : MonoBehaviour
     public Image menuImage;
     public Sprite[] wizardSprites;
 
-    public int spriteNumber;
+    public int spriteNumber = 0;
+
+    private void Start()
+    {
+        SpriteSelectorToUserData();
+    }
 
     private void SetMenuImage()
     {

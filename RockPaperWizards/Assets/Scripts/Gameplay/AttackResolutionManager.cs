@@ -122,8 +122,8 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP1GotHit();
                     player1Lives.P1TakesDamage();
                     player1Lives.UpdateP1LivesUI();
-                    ServiceLocator.GetAnimationProviderP1().PlayAttacktoPlayerFireAnimation();
-                    ServiceLocator.GetAnimationProviderP2().PlayAttackMiddleWaterAnimation();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttackMiddleFireAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttackToPlayerWaterAnimation();
 
                     break;
                 }
@@ -133,8 +133,8 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP2GotHit();
                     player2Lives.P2TakesDamage();
                     player2Lives.UpdateP2LivesUI();
-                    ServiceLocator.GetAnimationProviderP1().PlayAttackMiddleFireAnimation();
-                    ServiceLocator.GetAnimationProviderP2().PlayAttacktoPlayerPlantAnimation();
+                    ServiceLocator.GetAnimationProviderP1().PlayAttacktoPlayerFireAnimation();
+                    ServiceLocator.GetAnimationProviderP2().PlayAttackMiddlePlantAnimation();
                     break;
                 }
             case Resolution.WaterVsWater:
@@ -150,11 +150,6 @@ public class AttackResolutionManager : MonoBehaviour
                     resultText.SetP2GotHit();
                     player2Lives.P2TakesDamage();
                     player2Lives.UpdateP2LivesUI();
-
-                    Debug.Log(ServiceLocator.GetAnimationProviderP1());
-                    Debug.Log(ServiceLocator.GetAnimationProviderP2());
-
-
                     ServiceLocator.GetAnimationProviderP1().PlayAttackToPlayerWaterAnimation();
                     ServiceLocator.GetAnimationProviderP2().PlayAttackMiddleFireAnimation();
                     break;

@@ -14,8 +14,6 @@ public class SaveAndLoadManager : MonoBehaviour
     public delegate void OnLoadedDelegate(string json);
     public delegate void SaveToFirebase();
 
-    public event SaveToFirebase OnSave;
-
     FirebaseDatabase dataBase;
 
     string jsonString;
@@ -50,8 +48,6 @@ public class SaveAndLoadManager : MonoBehaviour
     //This loads multiple data and returns it as a string list with json.
     public void LoadData(string path, OnLoadedDelegateMultiple onLoadedDelegates)
     {
-        Debug.Log("LoadData Start");
-
         dataBase.RootReference.Child(path).GetValueAsync().ContinueWithOnMainThread(task =>
         {
             List<string> loadedJson = new List<string>();
@@ -60,9 +56,6 @@ public class SaveAndLoadManager : MonoBehaviour
             {
                 loadedJson.Add(item.GetRawJsonValue());
             }
-
-            Debug.Log("LoadData after loop, before delegate");
-
 
             onLoadedDelegates(loadedJson);
         });

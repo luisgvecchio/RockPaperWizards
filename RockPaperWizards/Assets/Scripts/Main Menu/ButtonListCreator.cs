@@ -54,7 +54,6 @@ public class ButtonListCreator : MonoBehaviour
         {
             if (!GameData.Instance.playerLocalData.activeGames.Contains(game.gameId) && game.openPlayerSlots > 0)
             {
-                Debug.Log("Joining existing game");
                 JoinGame(game);
                 return;
             }
@@ -82,7 +81,6 @@ public class ButtonListCreator : MonoBehaviour
 
         var newButton = Instantiate(buttonTemplate, panel.transform).GetComponent<Button>();
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = gameInfo.gameName;
-        //TODO: display more game status on each button.
 
         newButton.onClick.AddListener(() => SceneController.Instance.StartGame(gameInfo));
         newButton.onClick.AddListener(() => GameData.Instance.LoadUserGameData(gameInfo));
@@ -147,7 +145,6 @@ public class ButtonListCreator : MonoBehaviour
 
     public void JoinGame(GameInfo gameInfo)
     {
-        Debug.Log("joining game: " + gameInfo.gameId);
         GameData.Instance.playerLocalData.activeGames.Add(gameInfo.gameId);
 
         GameData.Instance.SavePlayerLocalData();
