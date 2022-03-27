@@ -70,8 +70,6 @@ public class WizardAnimationsManager : MonoBehaviour
         string gameIdPath = GameData.Instance.gameData.gameId;
 
         FirebaseDatabase.DefaultInstance.RootReference.Child("games/").Child(gameIdPath + "/").Child("players").ValueChanged -= RunP2WizardNumberUpdate;
-
-        Debug.Log("unsubscribed");
     }
 
     void RunP2WizardNumberUpdate(object sender, ValueChangedEventArgs args)

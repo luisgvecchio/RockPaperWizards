@@ -30,14 +30,14 @@ public class ResultTextManager : MonoBehaviour
     public void DeclareWinnerP1()
     {
         winnerOfTheMatch = playerNames.player1Name;
-        winnerMessage = "Well, well... Looks like " + winnerOfTheMatch + " it´s the winner of this duel";
+        winnerMessage = "Well, well... Looks like " + winnerOfTheMatch + " is the winner of this duel";
         resultText.text = winnerMessage;
 
     }
     public void DeclareWinnerP2()
     {
         winnerOfTheMatch = playerNames.player2Name;
-        winnerMessage = "Well, well... Looks like " + winnerOfTheMatch + " it´s the winner of this duel";
+        winnerMessage = "Well, well... Looks like " + winnerOfTheMatch + " is the winner of this duel";
         resultText.text = winnerMessage;
     }
 
